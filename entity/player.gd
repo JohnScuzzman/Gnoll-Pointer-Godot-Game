@@ -46,6 +46,8 @@ func _physics_process(delta: float) -> void:
 				position = target_position
 		
 		move_and_slide()
+		
+		# Snap the character back to the nearest 16x16 tile
 		global_position = get_rounded_vector2(global_position)
 
 func get_rounded_vector2(position_value: Vector2) -> Vector2:
