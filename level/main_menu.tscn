@@ -211,9 +211,19 @@ theme_override_styles/hovered = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/hovered_selected_focus = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/selected = SubResource("StyleBoxFlat_48gui")
-item_count = 2
+item_count = 12
 item_0/text = "Human"
 item_1/text = "Elf"
+item_2/text = "Dwarf"
+item_3/text = "Dragonborn"
+item_4/text = "Gnoll"
+item_5/text = "Avian"
+item_6/text = "Skeleton"
+item_7/text = "Mantis"
+item_8/text = "Automaton"
+item_9/text = "Werewolf"
+item_10/text = "Vampire"
+item_11/text = "Succubus"
 
 [node name="ClassContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer" unique_id=1380692597]
 layout_mode = 2
@@ -272,9 +282,19 @@ theme_override_styles/hovered = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/hovered_selected_focus = SubResource("StyleBoxFlat_48gui")
 theme_override_styles/selected = SubResource("StyleBoxFlat_48gui")
-item_count = 2
+item_count = 12
 item_0/text = "Knight"
-item_1/text = "Wizard"
+item_1/text = "Swashbuckler"
+item_2/text = "Wizard"
+item_3/text = "Necromancer"
+item_4/text = "Gunslinger"
+item_5/text = "Druid"
+item_6/text = "Ranger"
+item_7/text = "Dark Knight"
+item_8/text = "Warlock"
+item_9/text = "Conjurer"
+item_10/text = "Cyborg"
+item_11/text = "Bard"
 
 [connection signal="pressed" from="MainContainer/ButtonContainer/PlayButton" to="." method="_on_start_pressed"]
 [connection signal="pressed" from="MainContainer/ButtonContainer/QuitButton" to="." method="_on_quit_pressed"]
