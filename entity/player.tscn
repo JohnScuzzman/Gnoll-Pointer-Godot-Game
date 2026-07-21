@@ -11,8 +11,10 @@ script = ExtResource("1_xlvtu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1834460609]
 texture = ExtResource("2_xlvtu")
+offset = Vector2(8, 8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077159139]
+position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_yh4yq")
 
 [node name="Timer" type="Timer" parent="." unique_id=411373861]

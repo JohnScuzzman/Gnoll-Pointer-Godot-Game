@@ -7,10 +7,11 @@ extends CharacterBody2D
 @onready var timer = $Timer
 
 var can_move: bool = true
+var hitbox_tile_size : float
 
 func _ready() -> void:
 	# Margin to avoid clipping through collisions
-	tile_size -= 0.1
+	hitbox_tile_size = tile_size - 7
 
 func _physics_process(delta: float) -> void:
 	var input_direction = Vector2(
@@ -24,14 +25,14 @@ func _physics_process(delta: float) -> void:
 		var target_position: Vector2
 		if (input_direction.x < 0):
 			sprite.flip_h = false
-			target_position = Vector2(global_position.x - tile_size, global_position.y)
+			target_position = Vector2(global_position.x - hitbox_tile_size, global_position.y)
 		elif (input_direction.x > 0):
 			sprite.flip_h = true
-			target_position = Vector2(global_position.x + tile_size, global_position.y)
+			target_position = Vector2(global_position.x + hitbox_tile_size, global_position.y)
 		elif (input_direction.y < 0):
-			target_position = Vector2(global_position.x, global_position.y - tile_size)
+			target_position = Vector2(global_position.x, global_position.y - hitbox_tile_size)
 		elif (input_direction.y > 0):
-			target_position = Vector2(global_position.x, global_position.y + tile_size)
+			target_position = Vector2(global_position.x, global_position.y + hitbox_tile_size)
 		can_move = false
 		
 		var distance_to_target = position.distance_to(target_position)
@@ -43,10 +44,12 @@ func _physics_process(delta: float) -> void:
 			if distance_to_target < velocity.length() * delta:
 				velocity = Vector2.ZERO
 				position = target_position
-				
-		move_and_slide()
 		
-		global_position = global_position.round()
+		move_and_slide()
+		global_position = get_rounded_vector2(global_position)
+
+func get_rounded_vector2(position: Vector2) -> Vector2:
+	return Vector2(round(position.x / tile_size) * tile_size, round(position.y / tile_size) * tile_size)
 
 func _on_timer_timeout() -> void:
 	can_move = true
