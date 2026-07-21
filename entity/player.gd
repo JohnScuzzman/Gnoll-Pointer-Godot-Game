@@ -48,8 +48,8 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 		global_position = get_rounded_vector2(global_position)
 
-func get_rounded_vector2(position: Vector2) -> Vector2:
-	return Vector2(round(position.x / tile_size) * tile_size, round(position.y / tile_size) * tile_size)
+func get_rounded_vector2(position_value: Vector2) -> Vector2:
+	return Vector2(round(position_value.x / tile_size) * tile_size, round(position_value.y / tile_size) * tile_size)
 
 func _on_timer_timeout() -> void:
 	can_move = true
