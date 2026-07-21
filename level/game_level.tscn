@@ -64,6 +64,9 @@ tile_set = SubResource("TileSet_4sx37")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=708833318]
 position = Vector2(32, 32)
+zoom = Vector2(2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
 
 [node name="DebugLabel" type="Label" parent="." unique_id=1583919719]
 offset_left = 1.0
