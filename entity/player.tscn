@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://bmk6wpsll23fg"]
+
+[ext_resource type="Script" uid="uid://dsn1lalff0tbv" path="res://entity/player.gd" id="1_xlvtu"]
+[ext_resource type="Texture2D" uid="uid://d1nnl7vub7bw8" path="res://art/knightLeft.png" id="2_qd8qs"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
+size = Vector2(16, 16)
+
+[node name="Player" type="CharacterBody2D" unique_id=1452170030]
+script = ExtResource("1_xlvtu")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1834460609]
+texture = ExtResource("2_qd8qs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077159139]
+shape = SubResource("RectangleShape2D_yh4yq")
+
+[node name="Timer" type="Timer" parent="." unique_id=411373861]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
