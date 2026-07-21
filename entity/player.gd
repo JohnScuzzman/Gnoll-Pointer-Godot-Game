@@ -23,10 +23,10 @@ func _physics_process(delta: float) -> void:
 		
 		var target_position: Vector2
 		if (input_direction.x < 0):
-			sprite.flip_h = true
+			sprite.flip_h = false
 			target_position = Vector2(global_position.x - tile_size, global_position.y)
 		elif (input_direction.x > 0):
-			sprite.flip_h = false
+			sprite.flip_h = true
 			target_position = Vector2(global_position.x + tile_size, global_position.y)
 		elif (input_direction.y < 0):
 			target_position = Vector2(global_position.x, global_position.y - tile_size)

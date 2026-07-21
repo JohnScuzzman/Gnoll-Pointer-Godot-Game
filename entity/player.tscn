@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bmk6wpsll23fg"]
 
 [ext_resource type="Script" uid="uid://dsn1lalff0tbv" path="res://entity/player.gd" id="1_xlvtu"]
-[ext_resource type="Texture2D" uid="uid://d1nnl7vub7bw8" path="res://art/knightLeft.png" id="2_qd8qs"]
+[ext_resource type="Texture2D" uid="uid://b3mrufsv6tjhb" path="res://art/PlayerSprites/HumanMelee.png" id="2_xlvtu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
 size = Vector2(16, 16)
@@ -10,7 +10,7 @@ size = Vector2(16, 16)
 script = ExtResource("1_xlvtu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1834460609]
-texture = ExtResource("2_qd8qs")
+texture = ExtResource("2_xlvtu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2077159139]
 shape = SubResource("RectangleShape2D_yh4yq")

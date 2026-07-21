@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c10ej6ja8pplq"
-path="res://.godot/imported/RoomTileset.png-a780f1ccb8fb8937a66ee0fe1c1b8631.ctex"
+path="res://.godot/imported/RoomTileset.png-880b22c70e6a0af2a8b4a6f6095adbd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/RoomTileset.png"
-dest_files=["res://.godot/imported/RoomTileset.png-a780f1ccb8fb8937a66ee0fe1c1b8631.ctex"]
+source_file="res://art/DungeonSprites/RoomTileset.png"
+dest_files=["res://.godot/imported/RoomTileset.png-880b22c70e6a0af2a8b4a6f6095adbd4.ctex"]
 
 [params]
 

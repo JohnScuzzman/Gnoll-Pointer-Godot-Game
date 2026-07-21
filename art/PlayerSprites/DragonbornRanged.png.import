@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d1nnl7vub7bw8"
-path="res://.godot/imported/knightLeft.png-e4c9d2e578135db2c7bf4c451c13b702.ctex"
+uid="uid://b7ujucjc4kqpg"
+path="res://.godot/imported/DragonbornRanged.png-5b4ea466efaeeb2a4069513bf3f87478.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/knightLeft.png"
-dest_files=["res://.godot/imported/knightLeft.png-e4c9d2e578135db2c7bf4c451c13b702.ctex"]
+source_file="res://art/PlayerSprites/DragonbornRanged.png"
+dest_files=["res://.godot/imported/DragonbornRanged.png-5b4ea466efaeeb2a4069513bf3f87478.ctex"]
 
 [params]
 
