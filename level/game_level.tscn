@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://cb6ie46724leb"]
 
+[ext_resource type="Script" uid="uid://ddw6bn2tg2aid" path="res://level/game_level.gd" id="1_komg3"]
 [ext_resource type="PackedScene" uid="uid://bmk6wpsll23fg" path="res://entity/player.tscn" id="2_komg3"]
 [ext_resource type="Texture2D" uid="uid://c10ej6ja8pplq" path="res://art/RoomTileset.png" id="2_xe2we"]
 
@@ -33,6 +34,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_xe2we")
 
 [node name="GameLevel" type="Node2D" unique_id=379133356]
+script = ExtResource("1_komg3")
 
 [node name="Player" parent="." unique_id=1452170030 instance=ExtResource("2_komg3")]
 position = Vector2(71.97607, 40.316795)
@@ -47,3 +49,9 @@ tile_set = SubResource("TileSet_ymwx8")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=708833318]
 position = Vector2(71.97607, 40.316795)
+
+[node name="DebugLabel" type="Label" parent="." unique_id=1583919719]
+offset_left = 1.0
+offset_top = -31.0
+offset_right = 41.0
+offset_bottom = -8.0

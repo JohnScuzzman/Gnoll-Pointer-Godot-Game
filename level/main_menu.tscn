@@ -1,0 +1,282 @@
+[gd_scene format=3 uid="uid://mu67aofe144l"]
+
+[ext_resource type="Script" uid="uid://dubnt5tfupguc" path="res://level/main_menu.gd" id="1_q7hnt"]
+[ext_resource type="Texture2D" uid="uid://chamo7j4il2g4" path="res://art/Background.png" id="2_5vetp"]
+[ext_resource type="Texture2D" uid="uid://cja1yfvfdqr7e" path="res://art/GameLogo.png" id="3_ygiax"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q7hnt"]
+texture = ExtResource("2_5vetp")
+modulate_color = Color(0.28118682, 0.28118688, 0.28118682, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5vetp"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ygiax"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6k6ys"]
+bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48gui"]
+bg_color = Color(0.5489626, 0.5489626, 0.54896253, 1)
+
+[node name="Main Menu" type="Control" unique_id=1492947255]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q7hnt")
+
+[node name="Panel" type="Panel" parent="." unique_id=160749929]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_q7hnt")
+
+[node name="MainContainer" type="VBoxContainer" parent="." unique_id=449098240]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -544.5
+offset_top = -217.5
+offset_right = 544.5
+offset_bottom = 217.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="GameLogo" type="TextureRect" parent="MainContainer" unique_id=1697153281]
+layout_mode = 2
+texture = ExtResource("3_ygiax")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="MainContainer" unique_id=380478281]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="PlayButton" type="Button" parent="MainContainer/ButtonContainer" unique_id=1098767138]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5vetp")
+text = "Start Game"
+
+[node name="QuitButton" type="Button" parent="MainContainer/ButtonContainer" unique_id=178480715]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_5vetp")
+text = "Quit
+"
+
+[node name="SelectorContainer" type="VBoxContainer" parent="MainContainer" unique_id=562775348]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="NameTextEdit" type="TextEdit" parent="MainContainer/SelectorContainer" unique_id=1417333094]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(0.21230447, 0.21230504, 0.21230465, 0.6)
+theme_override_styles/normal = SubResource("StyleBoxFlat_ygiax")
+placeholder_text = "Name"
+
+[node name="RaceContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer" unique_id=793746830]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RaceStatContainer" type="VBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer" unique_id=1687745758]
+layout_mode = 2
+
+[node name="RaceTitle" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer" unique_id=832957277]
+layout_mode = 2
+text = "Please Choose a Race: "
+
+[node name="StatContainer" type="VBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer" unique_id=366090004]
+layout_mode = 2
+
+[node name="StatRowContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer" unique_id=1787515753]
+layout_mode = 2
+
+[node name="HpContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer" unique_id=853142894]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer/HpContainer" unique_id=209511990]
+layout_mode = 2
+text = "HP:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer/HpContainer" unique_id=1859650368]
+layout_mode = 2
+text = "XX"
+
+[node name="StatRowContainer2" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer" unique_id=1450685491]
+layout_mode = 2
+
+[node name="ChaContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2" unique_id=1794392751]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/ChaContainer" unique_id=1900677950]
+layout_mode = 2
+text = "CHA:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/ChaContainer" unique_id=1518314631]
+layout_mode = 2
+text = "XX"
+
+[node name="IntContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2" unique_id=1114003161]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/IntContainer" unique_id=844081946]
+layout_mode = 2
+text = "INT:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/IntContainer" unique_id=1093432112]
+layout_mode = 2
+text = "XX"
+
+[node name="StatRowContainer3" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer" unique_id=233906038]
+layout_mode = 2
+
+[node name="ConContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3" unique_id=1518739247]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/ConContainer" unique_id=290993551]
+layout_mode = 2
+text = "CON:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/ConContainer" unique_id=932466925]
+layout_mode = 2
+text = "XX"
+
+[node name="StrContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3" unique_id=978961642]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/StrContainer" unique_id=1592546661]
+layout_mode = 2
+text = "STR"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/StrContainer" unique_id=2004363220]
+layout_mode = 2
+text = "XX"
+
+[node name="StatRowContainer4" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer" unique_id=1357105702]
+layout_mode = 2
+
+[node name="DexContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4" unique_id=880014]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/DexContainer" unique_id=491655860]
+layout_mode = 2
+text = "DEX:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/DexContainer" unique_id=1078239040]
+layout_mode = 2
+text = "XX"
+
+[node name="WisContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4" unique_id=632844551]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/WisContainer" unique_id=47920960]
+layout_mode = 2
+text = "WIS:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/WisContainer" unique_id=1779585967]
+layout_mode = 2
+text = "XX"
+
+[node name="RaceItemList" type="ItemList" parent="MainContainer/SelectorContainer/RaceContainer" unique_id=1671534536]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6k6ys")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/hovered_selected_focus = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/selected = SubResource("StyleBoxFlat_48gui")
+item_count = 2
+item_0/text = "Human"
+item_1/text = "Elf"
+
+[node name="ClassContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer" unique_id=1380692597]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="ClassStatContainer" type="VBoxContainer" parent="MainContainer/SelectorContainer/ClassContainer" unique_id=1694056060]
+layout_mode = 2
+
+[node name="ClassTitle" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer" unique_id=1210797508]
+layout_mode = 2
+text = "Please Choose a Class:"
+
+[node name="HpLvlContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer" unique_id=1949700670]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/HpLvlContainer" unique_id=773695794]
+layout_mode = 2
+text = "HP/LVL:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/HpLvlContainer" unique_id=265304619]
+layout_mode = 2
+text = "X"
+
+[node name="MainStatContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer" unique_id=522816043]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/MainStatContainer" unique_id=103156142]
+layout_mode = 2
+text = "MAIN STAT:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/MainStatContainer" unique_id=2091699739]
+layout_mode = 2
+text = "X"
+
+[node name="SecondStatContainer" type="HBoxContainer" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer" unique_id=948184781]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/SecondStatContainer" unique_id=1698412103]
+layout_mode = 2
+text = "SECOND STAT:"
+
+[node name="Value" type="Label" parent="MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/SecondStatContainer" unique_id=607265806]
+layout_mode = 2
+text = "X"
+
+[node name="ClassItemList" type="ItemList" parent="MainContainer/SelectorContainer/ClassContainer" unique_id=1439512681]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hovered_selected_color = Color(0, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxFlat_6k6ys")
+theme_override_styles/hovered = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/hovered_selected = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/hovered_selected_focus = SubResource("StyleBoxFlat_48gui")
+theme_override_styles/selected = SubResource("StyleBoxFlat_48gui")
+item_count = 2
+item_0/text = "Knight"
+item_1/text = "Wizard"
+
+[connection signal="pressed" from="MainContainer/ButtonContainer/PlayButton" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MainContainer/ButtonContainer/QuitButton" to="." method="_on_quit_pressed"]
+[connection signal="item_selected" from="MainContainer/SelectorContainer/RaceContainer/RaceItemList" to="." method="_on_race_item_list_item_selected"]
+[connection signal="item_selected" from="MainContainer/SelectorContainer/ClassContainer/ClassItemList" to="." method="_on_class_item_list_item_selected"]

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project Cyberlich"
-run/main_scene="uid://cb6ie46724leb"
+run/main_scene="uid://mu67aofe144l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -23,7 +23,6 @@ GlobalEnums="*uid://ce2x4hnybfcqr"
 
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
-window/stretch/scale=4.0
 
 [dotnet]
 
