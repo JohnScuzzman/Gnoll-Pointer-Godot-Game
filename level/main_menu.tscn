@@ -20,7 +20,7 @@ bg_color = Color(1, 1, 1, 1)
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_48gui"]
 bg_color = Color(0.5489626, 0.5489626, 0.54896253, 1)
 
-[node name="Main Menu" type="Control" unique_id=1492947255]
+[node name="Main Menu" type="Control" unique_id=1492947255 node_paths=PackedStringArray("play_button", "quit_button", "class_item_list", "race_item_list", "name_text_edit", "hp_lvl_value", "main_stat_value", "second_stat_value", "hp_value", "cha_value", "int_value", "con_value", "str_value", "dex_value", "wis_value")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -28,6 +28,21 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q7hnt")
+play_button = NodePath("MainContainer/ButtonContainer/PlayButton")
+quit_button = NodePath("MainContainer/ButtonContainer/QuitButton")
+class_item_list = NodePath("MainContainer/SelectorContainer/ClassContainer/ClassItemList")
+race_item_list = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceItemList")
+name_text_edit = NodePath("MainContainer/SelectorContainer/NameTextEdit")
+hp_lvl_value = NodePath("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/HpLvlContainer/Value")
+main_stat_value = NodePath("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/MainStatContainer/Value")
+second_stat_value = NodePath("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/SecondStatContainer/Value")
+hp_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer/HpContainer/Value")
+cha_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/ChaContainer/Value")
+int_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/IntContainer/Value")
+con_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/ConContainer/Value")
+str_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/StrContainer/Value")
+dex_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/DexContainer/Value")
+wis_value = NodePath("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/WisContainer/Value")
 
 [node name="Panel" type="Panel" parent="." unique_id=160749929]
 layout_mode = 1
