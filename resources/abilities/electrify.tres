@@ -1,0 +1,12 @@
+[gd_resource type="Resource" format=3 uid="uid://dswjpmam4xfdv"]
+
+[ext_resource type="Script" uid="uid://dfrqcl7w1rgxl" path="res://resources/abilities/electrify.gd" id="1_di0fx"]
+
+[resource]
+script = ExtResource("1_di0fx")
+name = "Electrify"
+is_attack = true
+is_magic = true
+is_ranged = true
+mana_cost = 2
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

@@ -1,9 +1,10 @@
 [gd_resource type="Resource" script_class="Charge" format=3 uid="uid://djrlsj0bdgrrx"]
 
-[ext_resource type="Script" uid="uid://ckwt4rpyb0kkm" path="res://resources/charge.gd" id="1_5s5f7"]
+[ext_resource type="Script" uid="uid://ckwt4rpyb0kkm" path="res://resources/abilities/charge.gd" id="1_7imvb"]
 
 [resource]
-script = ExtResource("1_5s5f7")
+script = ExtResource("1_7imvb")
+name = "Charge"
 is_attack = true
 post_combat_effects = true
 mana_cost = 4

@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Dash" format=3 uid="uid://bebnckedcixfw"]
+
+[ext_resource type="Script" uid="uid://bxuj3rmp82kxk" path="res://resources/abilities/dash.gd" id="1_8kwqy"]
+
+[resource]
+script = ExtResource("1_8kwqy")
+name = "Dash"
+post_combat_effects = true
+mana_cost = 3
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

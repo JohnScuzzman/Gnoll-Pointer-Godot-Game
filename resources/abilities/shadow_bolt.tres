@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ShadowBolt" format=3 uid="uid://budwm3jqapyey"]
+
+[ext_resource type="Script" uid="uid://drbococrngssy" path="res://resources/abilities/shadow_bolt.gd" id="1_0scm7"]
+
+[resource]
+script = ExtResource("1_0scm7")
+is_attack = true
+is_magic = true
+is_ranged = true
+mana_cost = 5
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

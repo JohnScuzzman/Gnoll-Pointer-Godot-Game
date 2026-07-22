@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="DevastatingInsult" format=3 uid="uid://btd02ngqawad2"]
+
+[ext_resource type="Script" uid="uid://cmi0fymwh8v0t" path="res://resources/abilities/devastating_insult.gd" id="1_s2ss5"]
+
+[resource]
+script = ExtResource("1_s2ss5")
+name = "Devastating Insult"
+description = "Do you know who else missed their attack?\""
+is_attack = true
+is_magic = true
+is_ranged = true
+mana_cost = 2
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"
