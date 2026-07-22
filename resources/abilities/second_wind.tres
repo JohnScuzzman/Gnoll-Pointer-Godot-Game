@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SecondWind" format=3 uid="uid://wywtpipawe37"]
+
+[ext_resource type="Script" uid="uid://d4krc312tpat4" path="res://resources/abilities/second_wind.gd" id="1_2lbdo"]
+
+[resource]
+script = ExtResource("1_2lbdo")
+name = "Second Wind"
+post_combat_effects = true
+mana_cost = 7
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

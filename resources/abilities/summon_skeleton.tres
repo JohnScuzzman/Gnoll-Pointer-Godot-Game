@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="SummonSkeleton" format=3 uid="uid://b61vndnuy31gm"]
+
+[ext_resource type="Script" uid="uid://bxs108v0ggo6p" path="res://resources/abilities/summon_skeleton.gd" id="1_4dysj"]
+
+[resource]
+script = ExtResource("1_4dysj")
+is_magic = true
+post_combat_effects = true
+mana_cost = 16
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

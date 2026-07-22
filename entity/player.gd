@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends BaseEntity
 
 @export var walk_cooldown : float = 0.1
 @export var tile_size : float = 16

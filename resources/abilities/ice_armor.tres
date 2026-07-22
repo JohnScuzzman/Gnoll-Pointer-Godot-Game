@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="IceArmor" format=3 uid="uid://ch8am3tqt68ar"]
+
+[ext_resource type="Script" uid="uid://calv8aaxqkwyw" path="res://resources/abilities/ice_armor.gd" id="1_iwwn6"]
+
+[resource]
+script = ExtResource("1_iwwn6")
+name = "Ice Armor"
+is_magic = true
+post_combat_effects = true
+duration = 240
+mana_cost = 10
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

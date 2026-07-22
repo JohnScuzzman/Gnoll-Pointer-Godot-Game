@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Vengeance" format=3 uid="uid://bhvss63ublqv1"]
+
+[ext_resource type="Script" uid="uid://c0iy3cktfbky1" path="res://resources/abilities/vengeance.gd" id="1_y3n4p"]
+
+[resource]
+script = ExtResource("1_y3n4p")
+post_combat_effects = true
+duration = 240
+mana_cost = 5
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

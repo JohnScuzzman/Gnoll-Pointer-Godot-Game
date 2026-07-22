@@ -1,0 +1,12 @@
+[gd_resource type="Resource" format=3 uid="uid://3svdpm6m8gcg"]
+
+[ext_resource type="Script" uid="uid://da0wqllquajey" path="res://resources/abilities/fire_volley.gd" id="1_brerp"]
+
+[resource]
+script = ExtResource("1_brerp")
+is_attack = true
+is_ranged = true
+pre_combat_effects = true
+post_combat_effects = true
+mana_cost = 5
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"

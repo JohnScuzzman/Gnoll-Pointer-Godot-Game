@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="AimedShot" format=3 uid="uid://cjgycax7r8lin"]
+
+[ext_resource type="Script" uid="uid://c8ejpw51xacx2" path="res://resources/abilities/aimed_shot.gd" id="1_wt27r"]
+
+[resource]
+script = ExtResource("1_wt27r")
+name = "Aimed Shot"
+is_attack = true
+is_ranged = true
+mana_cost = 3
+metadata/_custom_type_script = "uid://dyg4p62d0k0e3"
