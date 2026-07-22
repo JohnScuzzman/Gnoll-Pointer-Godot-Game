@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://c8ypyra02p2ay"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_toi4c"]
+[ext_resource type="Resource" uid="uid://btd02ngqawad2" path="res://resources/abilities/devastating_insult.tres" id="2_ueorp"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_w8vvo"]
+[ext_resource type="Resource" uid="uid://bebnckedcixfw" path="res://resources/abilities/dash.tres" id="3_ir8q2"]
+
+[resource]
+script = ExtResource("2_w8vvo")
+name = "Bard"
+description = "A master of song and dance."
+hp_per_lvl = 3
+mana_per_lvl = 5
+main_stat = 1
+secondary_stat = 1
+abilities = Array[ExtResource("1_toi4c")]([ExtResource("2_ueorp"), ExtResource("3_ir8q2")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"

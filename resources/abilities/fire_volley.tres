@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://3svdpm6m8gcg"]
+[gd_resource type="Resource" script_class="FireVolley" format=3 uid="uid://3svdpm6m8gcg"]
 
 [ext_resource type="Script" uid="uid://da0wqllquajey" path="res://resources/abilities/fire_volley.gd" id="1_brerp"]
 

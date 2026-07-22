@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://dsjfr12hfx5wv"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_po5tr"]
+[ext_resource type="Resource" uid="uid://djrlsj0bdgrrx" path="res://resources/abilities/charge.tres" id="2_3abt6"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_x0ype"]
+[ext_resource type="Resource" uid="uid://dmqmg5jex26m3" path="res://resources/abilities/drain_life.tres" id="3_omlce"]
+
+[resource]
+script = ExtResource("2_x0ype")
+name = "Dark Knight"
+description = "A fallen hero."
+is_caster = true
+hp_per_lvl = 6
+mana_per_lvl = 5
+main_stat = 3
+abilities = Array[ExtResource("1_po5tr")]([ExtResource("2_3abt6"), ExtResource("3_omlce")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"

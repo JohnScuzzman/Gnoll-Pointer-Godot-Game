@@ -1,17 +1,9 @@
 [gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://bdq6btvb18muv"]
 
 [ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_y0ofw"]
-[ext_resource type="Script" uid="uid://ckwt4rpyb0kkm" path="res://resources/abilities/charge.gd" id="2_ehdx4"]
-[ext_resource type="Script" uid="uid://d4krc312tpat4" path="res://resources/abilities/second_wind.gd" id="3_bcu4s"]
+[ext_resource type="Resource" uid="uid://djrlsj0bdgrrx" path="res://resources/abilities/charge.tres" id="2_y0ofw"]
+[ext_resource type="Resource" uid="uid://wywtpipawe37" path="res://resources/abilities/second_wind.tres" id="3_ehdx4"]
 [ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="4_5nkoy"]
-
-[sub_resource type="Resource" id="Resource_5s5f7"]
-script = ExtResource("2_ehdx4")
-metadata/_custom_type_script = "uid://ckwt4rpyb0kkm"
-
-[sub_resource type="Resource" id="Resource_6ortt"]
-script = ExtResource("3_bcu4s")
-metadata/_custom_type_script = "uid://d4krc312tpat4"
 
 [resource]
 script = ExtResource("4_5nkoy")
@@ -21,5 +13,5 @@ hp_per_lvl = 6
 mana_per_lvl = 5
 main_stat = 2
 secondary_stat = 2
-abilities = Array[ExtResource("1_y0ofw")]([SubResource("Resource_5s5f7"), SubResource("Resource_6ortt")])
+abilities = Array[ExtResource("1_y0ofw")]([ExtResource("2_y0ofw"), ExtResource("3_ehdx4")])
 metadata/_custom_type_script = "uid://bj3eyooemgov5"

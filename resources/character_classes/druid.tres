@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://benuspevolo74"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_aoe32"]
+[ext_resource type="Resource" uid="uid://ch8am3tqt68ar" path="res://resources/abilities/ice_armor.tres" id="2_ghssp"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_kkdub"]
+[ext_resource type="Resource" uid="uid://dswjpmam4xfdv" path="res://resources/abilities/electrify.tres" id="3_i8vc3"]
+
+[resource]
+script = ExtResource("2_kkdub")
+name = "Druid"
+description = "A mystic, and protector of all natural things."
+is_caster = true
+hp_per_lvl = 4
+mana_per_lvl = 5
+main_stat = 3
+abilities = Array[ExtResource("1_aoe32")]([ExtResource("2_ghssp"), ExtResource("3_i8vc3")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"
