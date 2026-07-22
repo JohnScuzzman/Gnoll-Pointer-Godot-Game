@@ -28,6 +28,10 @@ window/stretch/aspect="expand"
 
 project/assembly_name="Project Cyberlich"
 
+[global_group]
+
+Player="Used for funtions that check collision with areas for music changes, visibility changes, triggering quests, etc."
+
 [input]
 
 right={
