@@ -2,10 +2,10 @@ class_name Vengeance
 extends CharacterAbility
 
 func min_damage(entity: BaseEntity) -> int:
-	return entity.equiped_melee_weapon.min_damage + 1
+	return entity.equipped_melee_weapon.min_damage + 1
 
 func max_damage(entity: BaseEntity) -> int:
-	return entity.equiped_melee_weapon.min_damage + 1
+	return entity.equipped_melee_weapon.min_damage + 1
 
 @warning_ignore("unused_parameter")
 func ability_range(entity: BaseEntity) -> int:
