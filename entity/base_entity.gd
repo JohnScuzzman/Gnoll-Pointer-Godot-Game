@@ -1,7 +1,6 @@
 class_name BaseEntity
 extends CharacterBody2D
 
-@export var ch: String # Unsure what this is
 @export var stats: Stats
 @export var armor: Armor
 @export var equipped_melee_weapon: Weapon
