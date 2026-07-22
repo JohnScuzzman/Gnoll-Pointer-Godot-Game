@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://dmqmg5jex26m3"]
+[gd_resource type="Resource" script_class="DrainLife" format=3 uid="uid://dmqmg5jex26m3"]
 
 [ext_resource type="Script" uid="uid://cxrnxdtd2j2l4" path="res://resources/abilities/drain_life.gd" id="1_4mo13"]
 

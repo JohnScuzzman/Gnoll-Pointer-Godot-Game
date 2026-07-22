@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://dc0qhvweu3p6"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_iardx"]
+[ext_resource type="Resource" uid="uid://3svdpm6m8gcg" path="res://resources/abilities/fire_volley.tres" id="2_tijkc"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_trxn8"]
+[ext_resource type="Resource" uid="uid://bebnckedcixfw" path="res://resources/abilities/dash.tres" id="3_ijlkc"]
+
+[resource]
+script = ExtResource("2_trxn8")
+name = "Gunslinger"
+description = "A crack shot, master of flash of gunpowder."
+hp_per_lvl = 4
+mana_per_lvl = 5
+main_stat = 3
+abilities = Array[ExtResource("1_iardx")]([ExtResource("2_tijkc"), ExtResource("3_ijlkc")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"

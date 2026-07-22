@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://nlmt1iw0v3r5"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_bfr8t"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_nke5s"]
+[ext_resource type="Resource" uid="uid://3svdpm6m8gcg" path="res://resources/abilities/fire_volley.tres" id="2_t1vou"]
+[ext_resource type="Resource" uid="uid://bebnckedcixfw" path="res://resources/abilities/dash.tres" id="3_8ow8l"]
+
+[resource]
+script = ExtResource("2_nke5s")
+name = "Swashbuckler"
+description = "A black-hearted pirate, as strong as his rum."
+hp_per_lvl = 4
+mana_per_lvl = 5
+main_stat = 1
+secondary_stat = 1
+abilities = Array[ExtResource("1_bfr8t")]([ExtResource("2_t1vou"), ExtResource("3_8ow8l")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"

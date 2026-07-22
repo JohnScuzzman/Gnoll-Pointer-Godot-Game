@@ -1,4 +1,4 @@
-[gd_resource type="Resource" format=3 uid="uid://dswjpmam4xfdv"]
+[gd_resource type="Resource" script_class="Electrify" format=3 uid="uid://dswjpmam4xfdv"]
 
 [ext_resource type="Script" uid="uid://dfrqcl7w1rgxl" path="res://resources/abilities/electrify.gd" id="1_di0fx"]
 

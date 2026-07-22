@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://dpm2o8wxv588m"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_ajbo1"]
+[ext_resource type="Resource" uid="uid://ch8am3tqt68ar" path="res://resources/abilities/ice_armor.tres" id="2_0rfvs"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_qwba0"]
+[ext_resource type="Resource" uid="uid://b61vndnuy31gm" path="res://resources/abilities/summon_skeleton.tres" id="3_wsjs2"]
+
+[resource]
+script = ExtResource("2_qwba0")
+name = "Conjurer"
+description = "A Conjurer who pulls servants from the aether."
+is_caster = true
+hp_per_lvl = 2
+mana_per_lvl = 7
+main_stat = 1
+secondary_stat = 1
+abilities = Array[ExtResource("1_ajbo1")]([ExtResource("2_0rfvs"), ExtResource("3_wsjs2")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"

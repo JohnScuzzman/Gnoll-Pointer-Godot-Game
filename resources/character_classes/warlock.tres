@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="CharacterClass" format=3 uid="uid://46wxgtoc4bud"]
+
+[ext_resource type="Script" uid="uid://dyg4p62d0k0e3" path="res://resources/abilities/character_ability.gd" id="1_2nlqn"]
+[ext_resource type="Resource" uid="uid://dmqmg5jex26m3" path="res://resources/abilities/drain_life.tres" id="2_5iavf"]
+[ext_resource type="Script" uid="uid://bj3eyooemgov5" path="res://resources/character_classes/character_class.gd" id="2_jvd8f"]
+[ext_resource type="Resource" uid="uid://toypsrprkuup" path="res://resources/abilities/magic_missle.tres" id="3_xbppd"]
+
+[resource]
+script = ExtResource("2_jvd8f")
+name = "Warlock"
+description = "A master of the dark arts."
+is_caster = true
+hp_per_lvl = 2
+mana_per_lvl = 5
+main_stat = 3
+abilities = Array[ExtResource("1_2nlqn")]([ExtResource("2_5iavf"), ExtResource("3_xbppd")])
+metadata/_custom_type_script = "uid://bj3eyooemgov5"
