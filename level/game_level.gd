@@ -34,7 +34,7 @@ func _physics_process(_delta: float) -> void:
 	if (turns_to_skip > 0):
 		print("Player turn skipped")
 		turns_to_skip -= 1
-		execute_enemy_turn()
+		enemy_turn()
 	
 	var input_direction = Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -49,16 +49,13 @@ func _physics_process(_delta: float) -> void:
 			print(player_collision.name)
 			if player_collision.is_in_group("enemy"):
 				print("Colided with an enemy")
-				
-				#This is just an example but basically do any sort of combat 
-				#calculation with whoever is invovled
-				player_collision.on_hit()
-				player.on_hit()
+				# TODO : Combat
+				player_collision.on_hit(1)
 			else:
 				print("Colided with an obstacle")
 		
 		print("End of player turn")
-		execute_enemy_turn()
+		enemy_turn()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (is_player_turn && event.is_action_pressed("rest") || 
@@ -76,19 +73,23 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed("spawn"):
 			var test_enemy = ENEMY_EXAMPLE_SCENE.instantiate()
 			test_enemy.global_position = Vector2(player.global_position.x + 64, player.global_position.y)
+			test_enemy.game_level_reference = self
 			add_child(test_enemy)
 			active_enemies.append(test_enemy)
 		
 		print("End of player turn")
-		execute_enemy_turn()
+		enemy_turn()
 
 func spawn_enemy() -> void:
 	is_player_turn = true
 	
-func execute_enemy_turn(): 
+func enemy_turn(): 
 	for active_enemy in active_enemies:
-		active_enemy.execute_turn(player)
-		
+		var enemy_collision = active_enemy.execute_turn(player)
+		if (enemy_collision != null && enemy_collision.is_in_group("player")):
+			print("Enemy colided with player")
+			player.on_hit(1)
+	
 	print("End of enemy turn")
 	turn += 1
 	print("Start of turn ", turn)

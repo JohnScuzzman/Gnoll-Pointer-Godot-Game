@@ -5,13 +5,16 @@ extends Area2D
 @export var room_name: String = "Chii'sii's House"
 @export var is_cleared: bool = false
 
+# NOTE : There is porbably a way to make a generic building script and attach them 
+# instead of creating a new one each time
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(_on_player_entered)
 	body_exited.connect(_on_player_exited)
 
 func _on_player_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		print("Entered " + room_name)
 		# Fades visibility in, rather than swapping it jarringly
 		chiisiis_house.visible = true
@@ -19,7 +22,7 @@ func _on_player_entered(body: Node2D) -> void:
 		# Trigger some kind of camera tomfoolery here, or reduce player FOV, etc.
 
 func _on_player_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		print("Left " + room_name)
 		chiisiis_house.visible = false
 		chiisiis_roof.visible = true
