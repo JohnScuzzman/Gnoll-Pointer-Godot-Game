@@ -35,8 +35,10 @@ func execute_turn(player):
 	if abs(direction.x) > abs(direction.y):
 		if direction.x > 0: 
 			global_position = get_rounded_vector2(global_position.x + tile_size, global_position.y)
+			sprite.flip_h = true
 		else: 
 			global_position = get_rounded_vector2(global_position.x - tile_size, global_position.y)
+			sprite.flip_h = false
 	else:
 		if direction.y > 0: 
 			global_position = get_rounded_vector2(global_position.x, global_position.y + tile_size)
