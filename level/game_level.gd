@@ -7,13 +7,18 @@ extends Node2D
 @onready var player_input_cooldown_timer = $PlayerInputCooldown
 
 const PLAYER_SCENE = preload("res://entity/player.tscn")
+const ENEMY_EXAMPLE_SCENE = preload("res://entity/enemy_example.tscn")
 
 var player: BaseEntity
 var player_name
 var player_class
 var player_race
 
-var can_move: bool = true
+var active_enemies: Array
+var turns_to_skip = 0
+var is_player_turn: bool = true
+#Delete this later
+var turn = 1
 
 func _ready() -> void:
 	player = PLAYER_SCENE.instantiate()
@@ -26,12 +31,17 @@ func _ready() -> void:
 	user_interface.get_node("DebugLabel").text = "Name: " + str(player_name) + " Class: " + str(player_class) + " Race: " + str(player_race)
 
 func _physics_process(_delta: float) -> void:
+	if (turns_to_skip > 0):
+		print("Player turn skipped")
+		turns_to_skip -= 1
+		execute_enemy_turn()
+	
 	var input_direction = Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
 			Input.get_action_strength("down") - Input.get_action_strength("up"))
-
-	if (can_move == true && input_direction != Vector2.ZERO):
-		can_move = false
+			
+	if (is_player_turn == true && input_direction != Vector2.ZERO):
+		is_player_turn = false
 		player_input_cooldown_timer.start(player_input_cooldown)
 		
 		var player_collision = player.try_move_or_colide(input_direction)
@@ -47,11 +57,41 @@ func _physics_process(_delta: float) -> void:
 			else:
 				print("Colided with an obstacle")
 		
-		print("End of turn")
+		print("End of player turn")
+		execute_enemy_turn()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if (is_player_turn && event.is_action_pressed("rest") || 
+		event.is_action_pressed("interact") || event.is_action_pressed("spawn")):
 			
-func _on_player_input_cooldown_timeout() -> void:
-	can_move = true
+		is_player_turn = false
+		player_input_cooldown_timer.start(player_input_cooldown)
+		
+		if event.is_action_pressed("rest"):
+			turns_to_skip = 2;
+		
+		if event.is_action_pressed("interact"):
+			print("Check North, South, West, East, Current Position for an interactable and call its on_interact function")
+			
+		if event.is_action_pressed("spawn"):
+			var test_enemy = ENEMY_EXAMPLE_SCENE.instantiate()
+			test_enemy.global_position = Vector2(player.global_position.x + 64, player.global_position.y)
+			add_child(test_enemy)
+			active_enemies.append(test_enemy)
+		
+		print("End of player turn")
+		execute_enemy_turn()
+
+func spawn_enemy() -> void:
+	is_player_turn = true
 	
-# I Recomend moving this in a bar entity or whatever
-func _on_bar_trigger_body_entered(body: Node2D) -> void:
-	pass # Replace with function body.
+func execute_enemy_turn(): 
+	for active_enemy in active_enemies:
+		active_enemy.execute_turn(player)
+		
+	print("End of enemy turn")
+	turn += 1
+	print("Start of turn ", turn)
+
+func _on_player_input_cooldown_timeout() -> void:
+	is_player_turn = true

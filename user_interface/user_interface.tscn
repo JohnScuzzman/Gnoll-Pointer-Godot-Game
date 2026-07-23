@@ -19,4 +19,4 @@ anchor_bottom = 1.0
 offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
-text = "Controls: Move WASD ←↑→↓"
+text = "Controls: Move WASD ←↑→↓  Skip Turn: ~ Interact: F DebugSpawnEnemy: M"
