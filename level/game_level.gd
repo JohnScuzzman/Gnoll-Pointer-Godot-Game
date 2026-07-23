@@ -54,6 +54,7 @@ func _physics_process(_delta: float) -> void:
 				if !player_collision.is_alive() && active_enemies.has(player_collision):
 					active_enemies.erase(player_collision)
 				else:
+					# TODO : this would not be calculated here it would be on enemy turn
 					player.on_hit(1)
 			else:
 				print("Colided with an obstacle")
