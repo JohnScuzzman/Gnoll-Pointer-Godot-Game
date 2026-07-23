@@ -7,11 +7,11 @@
 size = Vector2(16, 16)
 
 [node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
+script = ExtResource("1_six12")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1387523516]
 texture = ExtResource("1_ii74y")
 offset = Vector2(8, 8)
-script = ExtResource("1_six12")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280890054]
 position = Vector2(8, 8)
