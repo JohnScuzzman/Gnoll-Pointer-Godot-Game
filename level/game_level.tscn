@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://c07owb2c8tb47" path="res://level/bar_trigger.gd" id="4_4sx37"]
 [ext_resource type="Script" uid="uid://c3gtb7w4pcxyt" path="res://level/customs_trigger.gd" id="4_rkxjk"]
 [ext_resource type="Texture2D" uid="uid://ckyrl2q2o2rcp" path="res://art/DungeonSprites/Dungeon_Spritesheet.png" id="4_ymwx8"]
-[ext_resource type="PackedScene" uid="uid://c8xr027art8oh" path="res://entity/enemy_example.tscn" id="5_4sx37"]
-[ext_resource type="PackedScene" uid="uid://b3wtg51cfua7i" path="res://user_interface/user_interface.tscn" id="6_qf6wh"]
+[ext_resource type="PackedScene" uid="uid://c12e8fhtnpdc5" path="res://user_interface/user_interface.tscn" id="6_qf6wh"]
 [ext_resource type="Script" uid="uid://calv2h58el1mn" path="res://level/medic_trigger.gd" id="6_rkxjk"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_komg3"]
@@ -295,9 +294,5 @@ position_smoothing_speed = 10.0
 [node name="UserInterface" parent="." unique_id=344285624 instance=ExtResource("6_qf6wh")]
 
 [node name="PlayerInputCooldown" type="Timer" parent="." unique_id=894838426]
-
-[node name="EnemyExample" parent="." unique_id=738268757 instance=ExtResource("5_4sx37")]
-position = Vector2(160, 160)
-gravity_scale = 0.0
 
 [connection signal="timeout" from="PlayerInputCooldown" to="." method="_on_player_input_cooldown_timeout"]
