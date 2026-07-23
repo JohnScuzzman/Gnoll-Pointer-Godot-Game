@@ -25,33 +25,29 @@ func _ready() -> void:
 	print("This is where you would set stuff about the player")
 	user_interface.get_node("DebugLabel").text = "Name: " + str(player_name) + " Class: " + str(player_class) + " Race: " + str(player_race)
 
-func _unhandled_input(_event):
-	if ((Input.is_action_just_pressed("right") || Input.is_action_just_pressed("left") || 
-		Input.is_action_just_pressed("down") || Input.is_action_just_pressed("up")) &&
-		can_move == true):
-			
-		var input_direction = Vector2(
+func _physics_process(_delta: float) -> void:
+	var input_direction = Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
 			Input.get_action_strength("down") - Input.get_action_strength("up"))
-			
-		if (input_direction != Vector2.ZERO):
-			can_move = false
-			player_input_cooldown_timer.start(player_input_cooldown)
-			
-			var player_collision = player.try_move_or_colide(input_direction)
-			if (player_collision != null):
-				print(player_collision.name)
-				if player_collision.is_in_group("enemy"):
-					print("Colided with an enemy")
-					
-					#This is just an example but basically do any sort of combat 
-					#calculation with whoever is invovled
-					player_collision.on_hit()
-					player.on_hit()
-				else:
-					print("Colided with an obstacle")
-			
-			print("End of turn")
+
+	if (can_move == true && input_direction != Vector2.ZERO):
+		can_move = false
+		player_input_cooldown_timer.start(player_input_cooldown)
+		
+		var player_collision = player.try_move_or_colide(input_direction)
+		if (player_collision != null):
+			print(player_collision.name)
+			if player_collision.is_in_group("enemy"):
+				print("Colided with an enemy")
+				
+				#This is just an example but basically do any sort of combat 
+				#calculation with whoever is invovled
+				player_collision.on_hit()
+				player.on_hit()
+			else:
+				print("Colided with an obstacle")
+		
+		print("End of turn")
 			
 func _on_player_input_cooldown_timeout() -> void:
 	can_move = true
