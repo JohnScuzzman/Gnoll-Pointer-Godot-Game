@@ -17,7 +17,8 @@ var player_race
 var active_enemies: Array
 var turns_to_skip = 0
 var is_player_turn: bool = true
-#Delete this later
+
+#Delete this later DebugValue
 var turn = 1
 
 func _ready() -> void:
@@ -83,6 +84,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func spawn_enemy() -> void:
 	is_player_turn = true
 	
+# TODO : There is a weird behaviour where the enemy can end up under the player 
+# as like its trying to move even tho its dead. Investigate
 func enemy_turn(): 
 	for active_enemy in active_enemies:
 		var enemy_collision = active_enemy.execute_turn(player)
@@ -90,6 +93,7 @@ func enemy_turn():
 			print("Enemy colided with player")
 			player.on_hit(1)
 	
+	# This is for debug delete eventually
 	print("End of enemy turn")
 	turn += 1
 	print("Start of turn ", turn)

@@ -7,6 +7,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
 size = Vector2(16, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shqcg"]
+size = Vector2(8, 8)
+
 [node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
 gravity_scale = 0.0
 script = ExtResource("1_six12")
@@ -19,3 +22,8 @@ offset = Vector2(8, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280890054]
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_yh4yq")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=146593523]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_shqcg")
+target_position = Vector2(0, 0)

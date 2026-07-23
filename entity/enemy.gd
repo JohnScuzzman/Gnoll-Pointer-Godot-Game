@@ -5,6 +5,7 @@ extends RigidBody2D
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
+@onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
 var game_level_reference
 #PlaceHolder
@@ -26,30 +27,45 @@ func is_alive():
 func on_death():
 	game_level_reference.active_enemies.erase(self)
 	sprite.texture = death_texture
-	collision_shape.disabled = true
+	collision_shape.set_deferred("disabled",true)
 	remove_from_group("enemy")
 	add_to_group("interactable")
 
 # TODO : Use the global variable instead
 func execute_turn(player):
-	# Eventualy replace this with actual path finding but this is the concept
-	var direction = global_position.direction_to(player.global_position)
-	if abs(direction.x) > abs(direction.y):
-		if direction.x > 0: 
-			global_position = get_rounded_vector2(global_position.x + tile_size, global_position.y)
-			sprite.flip_h = true
-		else: 
-			global_position = get_rounded_vector2(global_position.x - tile_size, global_position.y)
-			sprite.flip_h = false
-	else:
-		if direction.y > 0: 
-			global_position = get_rounded_vector2(global_position.x, global_position.y + tile_size)
-		else: 
-			global_position = get_rounded_vector2(global_position.x, global_position.y - tile_size)
-	
-	# Implement reverse turn logic where monster hit player 
-	# We should probably return a shapecast just like with player 
-	# to keep most of the logic in the game level controler
+	if (is_alive):
+		shape_cast.target_position = Vector2.ZERO
+		shape_cast.force_shapecast_update()
+		
+		var new_position: Vector2
+		
+		# TODO : Implement actual path finding instead of going for the player only
+		var direction = global_position.direction_to(player.global_position)
+		if abs(direction.x) > abs(direction.y):
+			if direction.x > 0: 
+				sprite.flip_h = true
+				shape_cast.target_position = Vector2((tile_size / 2), 0)
+				new_position = get_rounded_vector2(global_position.x + tile_size, global_position.y)
+			else: 
+				sprite.flip_h = false
+				shape_cast.target_position = Vector2(-(tile_size / 2), 0)
+				new_position = get_rounded_vector2(global_position.x - tile_size, global_position.y)
+		else:
+			if direction.y > 0: 
+				shape_cast.target_position = Vector2(0, (tile_size / 2))
+				new_position = get_rounded_vector2(global_position.x, global_position.y + tile_size)
+			else: 
+				shape_cast.target_position = Vector2(0, -(tile_size / 2))
+				new_position = get_rounded_vector2(global_position.x, global_position.y - tile_size)
+		
+		shape_cast.force_shapecast_update()
+		
+		if shape_cast.is_colliding():
+			return shape_cast.get_collider(0)
+		else:
+			global_position = new_position
+			
+	return null
 
 # TODO : Use the global variable instead
 func get_rounded_vector2(x, y) -> Vector2:
