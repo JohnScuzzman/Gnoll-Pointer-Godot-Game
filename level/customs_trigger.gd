@@ -12,7 +12,7 @@ func _ready() -> void:
 	body_exited.connect(_on_player_exited)
 
 func _on_player_entered(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		print("Entered " + room_name)
 		# Fades visibility in, rather than swapping it jarringly
 		avia_customs_roof.visible = false
@@ -21,7 +21,7 @@ func _on_player_entered(body: Node2D) -> void:
 		# Trigger some kind of camera tomfoolery here, or reduce player FOV, etc.
 
 func _on_player_exited(body: Node2D) -> void:
-	if body.is_in_group("Player"):
+	if body.is_in_group("player"):
 		print("Left " + room_name)
 		avia_customs_roof.visible = true
 		avia.visible = true

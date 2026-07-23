@@ -6,6 +6,7 @@ extends RigidBody2D
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D
 
+var game_level_reference
 #PlaceHolder
 var hp = 1
 var armor_value = 0
@@ -23,6 +24,7 @@ func is_alive():
 	return hp > 0
 
 func on_death():
+	game_level_reference.active_enemies.erase(self)
 	sprite.texture = death_texture
 	collision_shape.disabled = true
 	remove_from_group("enemy")
@@ -47,7 +49,7 @@ func execute_turn(player):
 	
 	# Implement reverse turn logic where monster hit player 
 	# We should probably return a shapecast just like with player 
-	#to keep most of the logic in the game level controler
+	# to keep most of the logic in the game level controler
 
 # TODO : Use the global variable instead
 func get_rounded_vector2(x, y) -> Vector2:
