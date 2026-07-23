@@ -5,6 +5,9 @@ extends Area2D
 @export var room_name: String = "The Clipped Peregrine"
 @export var is_cleared: bool = false
 
+# NOTE : There is porbably a way to make a generic building script and attach them 
+# instead of creating a new one each time
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	body_entered.connect(_on_player_entered)
