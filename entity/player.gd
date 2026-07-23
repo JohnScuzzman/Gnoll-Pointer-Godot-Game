@@ -5,6 +5,9 @@ extends BaseEntity
 @onready var sprite = $Sprite2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
+func _ready():
+	add_to_group("Player")
+
 func try_move_or_colide(input_direction):
 	var new_player_position: Vector2
 	

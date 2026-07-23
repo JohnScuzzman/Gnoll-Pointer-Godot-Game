@@ -17,7 +17,7 @@ var can_move: bool = true
 
 func _ready() -> void:
 	player = PLAYER_SCENE.instantiate()
-	player.global_position = Vector2(128,128)
+	player.global_position = Vector2(64,64)
 	add_child(player)
 	
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
