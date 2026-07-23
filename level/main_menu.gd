@@ -1,22 +1,22 @@
 extends Control
 
-@onready var play_button = get_node("MainContainer/ButtonContainer/PlayButton")
-@onready var quit_button = get_node("MainContainer/ButtonContainer/QuitButton")
-@onready var class_item_list = get_node("MainContainer/SelectorContainer/ClassContainer/ClassItemList")
-@onready var race_item_list = get_node("MainContainer/SelectorContainer/RaceContainer/RaceItemList")
-@onready var name_text_edit = get_node("MainContainer/SelectorContainer/NameTextEdit")
+@export var play_button: Button
+@export var quit_button: Button
+@export var class_item_list: ItemList
+@export var race_item_list: ItemList
+@export var name_text_edit: TextEdit
 
-@onready var hp_lvl_value = get_node("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/HpLvlContainer/Value")
-@onready var main_stat_value = get_node("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/MainStatContainer/Value")
-@onready var second_stat_value = get_node("MainContainer/SelectorContainer/ClassContainer/ClassStatContainer/SecondStatContainer/Value")
+@export var hp_lvl_value: Label
+@export var main_stat_value: Label
+@export var second_stat_value: Label
 
-@onready var hp_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer/HpContainer/Value")
-@onready var cha_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/ChaContainer/Value")
-@onready var int_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer2/IntContainer/Value")
-@onready var con_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/ConContainer/Value")
-@onready var str_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer3/StrContainer/Value")
-@onready var dex_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/DexContainer/Value")
-@onready var wis_value = get_node("MainContainer/SelectorContainer/RaceContainer/RaceStatContainer/StatContainer/StatRowContainer4/WisContainer/Value")
+@export var hp_value: Label
+@export var cha_value: Label
+@export var int_value: Label
+@export var con_value: Label
+@export var str_value: Label
+@export var dex_value: Label
+@export var wis_value: Label
 
 func _ready() -> void:
 	class_item_list.select(0)
