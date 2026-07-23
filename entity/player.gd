@@ -41,5 +41,6 @@ func try_move_or_colide(input_direction):
 func get_rounded_vector2(x, y) -> Vector2:
 	return Vector2(round(x / tile_size) * tile_size, round(y / tile_size) * tile_size)
 	
-func on_hit():
+func on_hit(value):
+	# TODO : Calculate on hit and modifiy values
 	print("Modify player attribute")

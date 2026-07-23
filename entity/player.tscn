@@ -15,6 +15,7 @@ collision_mask = 3
 script = ExtResource("1_xlvtu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1834460609]
+z_index = 5
 texture = ExtResource("2_xlvtu")
 offset = Vector2(8, 8)
 

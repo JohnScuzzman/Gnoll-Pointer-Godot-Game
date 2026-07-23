@@ -49,11 +49,12 @@ func _physics_process(_delta: float) -> void:
 			print(player_collision.name)
 			if player_collision.is_in_group("enemy"):
 				print("Colided with an enemy")
-				
-				#This is just an example but basically do any sort of combat 
-				#calculation with whoever is invovled
-				player_collision.on_hit()
-				player.on_hit()
+				# TODO : Combat
+				player_collision.on_hit(1)
+				if !player_collision.is_alive() && active_enemies.has(player_collision):
+					active_enemies.erase(player_collision)
+				else:
+					player.on_hit(1)
 			else:
 				print("Colided with an obstacle")
 		
