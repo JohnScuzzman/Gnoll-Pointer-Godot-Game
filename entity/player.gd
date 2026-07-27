@@ -6,7 +6,9 @@ extends BaseEntity
 @onready var collision_shape = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
+var game_level
 var is_resting = false
+var turns_rested = 0
 
 func _ready():
 	add_to_group("player")
@@ -52,12 +54,16 @@ func get_rounded_vector2(x, y) -> Vector2:
 func on_hit(value):
 	value -= stats.armor_class
 	stats.health_points -= value
+	return value
 
 func can_rest():
 	return stats.health_points < stats.max_health_points
 	
 func on_rest():
 	stats.health_points += rest_rate
+	turns_rested += 1
 	if (stats.health_points >= stats.max_health_points):
+		game_level.add_event_log("You rested for " + str(turns_rested) + " turn(s)")
+		turns_rested = 0
 		stats.health_points = stats.max_health_points
 		is_resting = false;

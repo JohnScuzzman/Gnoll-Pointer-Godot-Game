@@ -39,6 +39,7 @@ func _ready() -> void:
 	player.stats = stats
 	player.character_class = player_class
 	player.race = player_race
+	player.game_level = self
 	add_child(player)
 	
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
@@ -46,7 +47,7 @@ func _ready() -> void:
 	event_box_scroll_container = user_interface.get_node("EventBoxContainer/EventBoxScrollContainer")
 	events_container = event_box_scroll_container.get_node("EventsContainer")
 	
-	add_event_log("Start of turn " + str(turn))
+	print("Start of turn " + str(turn))
 
 func update_ui():
 		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + \
@@ -70,11 +71,11 @@ func _physics_process(_delta: float) -> void:
 			var player_collision = player.try_move_or_colide(input_direction)
 			if (player_collision != null):
 				if player_collision.is_in_group("enemy"):
-					add_event_log("Player colided with an enemy")
-					player_collision.on_hit(1)
+					print("Player colided with an enemy")
+					add_event_log("You hit " + player_collision.entity_name + " for " + str(player_collision.on_hit(1)) + " damage")
 					end_player_turn()
 				else:
-					add_event_log("Player colided with an obstacle")
+					print("Player colided with an obstacle")
 			else:
 				end_player_turn()
 
@@ -101,7 +102,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			active_enemies.append(test_enemy)
 
 func end_player_turn():
-	add_event_log("End of player turn")
+	print("End of player turn")
 	is_player_turn = false
 	turn_timer.start(turn_cooldown)
 	
@@ -109,22 +110,24 @@ func _on_turn_timer_timeout() -> void:
 	enemy_turn()
 	
 func enemy_turn(): 
-	add_event_log("Start of enemy turn")
+	print("Start of enemy turn")
 	
 	for active_enemy in active_enemies:
 		var enemy_collision = active_enemy.execute_turn(player)
 		if (enemy_collision != null && enemy_collision.is_in_group("player")):
-			add_event_log("Enemy colided with player")
-			player.on_hit(1)
+			add_event_log(active_enemy.entity_name + " hit you for " + str(player.on_hit(1)) +  " damage")
+					
 	
 	# This is for debug delete eventually
-	add_event_log("End of enemy turn")
+	print("End of enemy turn")
 	turn += 1
-	add_event_log("Start of turn " + str(turn))
+	print("Start of turn " + str(turn))
 	is_player_turn = true
 	
 func add_event_log(message):
 	var new_log = Label.new()
 	new_log.text = message
 	events_container.add_child(new_log)
-	event_box_scroll_container.scroll_vertical = int(event_box_scroll_container.get_v_scroll_bar().max_value)
+	# TODO: This technically locks the entire game for a single frame using a signal would be better
+	await get_tree().process_frame
+	event_box_scroll_container.scroll_vertical = event_box_scroll_container.get_v_scroll_bar().max_value

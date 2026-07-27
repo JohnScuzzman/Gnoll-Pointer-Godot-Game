@@ -8,6 +8,7 @@ extends RigidBody2D
 
 var game_level_reference
 #PlaceHolder
+var entity_name = "Kobold"
 var hp = 1
 var armor_value = 0
 
@@ -25,6 +26,7 @@ func on_hit(value):
 	hp -= value
 	if !is_alive():
 		on_death()
+	return value
 		
 func is_alive():
 	return hp > 0
