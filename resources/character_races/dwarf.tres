@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://bet6pnao1upjc"]
+
+[ext_resource type="Script" uid="uid://c3rva5ydu7iwf" path="res://resources/entities/stats.gd" id="1_po5eu"]
+
+[resource]
+script = ExtResource("1_po5eu")
+name = "Dwarf"
+charisma = 10
+constitution = 14
+dexterity = 10
+intelligence = 10
+strength = 14
+wisdom = 16
+health_points = 10
+metadata/_custom_type_script = "uid://c3rva5ydu7iwf"

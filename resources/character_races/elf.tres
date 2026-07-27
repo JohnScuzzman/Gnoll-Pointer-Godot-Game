@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://b6onppfy2pucs"]
+
+[ext_resource type="Script" uid="uid://c3rva5ydu7iwf" path="res://resources/entities/stats.gd" id="1_e4dwl"]
+
+[resource]
+script = ExtResource("1_e4dwl")
+name = "Elf"
+charisma = 12
+constitution = 10
+dexterity = 16
+intelligence = 14
+strength = 10
+wisdom = 12
+health_points = 8
+metadata/_custom_type_script = "uid://c3rva5ydu7iwf"

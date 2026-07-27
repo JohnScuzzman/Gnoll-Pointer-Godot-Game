@@ -57,16 +57,31 @@ enum ItemTypes {
 }
 
 enum Races {
-	HUMAN,
-	ELF,
-	DWARF,
-	DRAGONBORN,
-	GNOLL,
-	AVIAN,
-	SKELETON,
-	MANTIS,
-	AUTOMATON,
-	WEREWOLF,
-	VAMPIRE,
-	SUCCUBUS,
+	human,
+	elf,
+	dwarf,
+	dragonborn,
+	gnoll,
+	avian,
+	skeleton,
+	mantis,
+	automaton,
+	werewolf,
+	vampire,
+	succubus,
+}
+
+enum Clases {
+	knight,
+	swashbuckler,
+	wizard,
+	necromancer,
+	gunslinger,
+	druid,
+	ranger,
+	dark_knight,
+	warlock,
+	conjurer,
+	cyborg,
+	bard
 }

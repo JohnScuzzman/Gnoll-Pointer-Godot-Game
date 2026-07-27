@@ -11,8 +11,8 @@ const ENEMY_EXAMPLE_SCENE = preload("res://entity/enemy_example.tscn")
 
 var player: BaseEntity
 var player_name
-var player_class
-var player_race
+var player_class: Resource
+var player_race: Resource
 
 var active_enemies: Array
 var turns_to_skip = 0
@@ -29,7 +29,7 @@ func _ready() -> void:
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
 	
 	print("This is where you would set stuff about the player")
-	user_interface.get_node("DebugLabel").text = "Name: " + str(player_name) + " Class: " + str(player_class) + " Race: " + str(player_race)
+	user_interface.get_node("DebugLabel").text = "Name: " + str(player_name) + " Class: " + str(player_class.name) + " Race: " + str(player_race.name)
 
 func _physics_process(_delta: float) -> void:
 	if (turns_to_skip > 0):
