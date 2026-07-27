@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://ddw6bn2tg2aid" path="res://level/game_level.gd" id="1_komg3"]
 [ext_resource type="Script" uid="uid://c07owb2c8tb47" path="res://level/bar_trigger.gd" id="4_4sx37"]
+[ext_resource type="AudioStream" uid="uid://ckp1st10fymkt" path="res://music/Tradition Among Birds.mp3" id="4_qf6wh"]
 [ext_resource type="Script" uid="uid://c3gtb7w4pcxyt" path="res://level/customs_trigger.gd" id="4_rkxjk"]
 [ext_resource type="Texture2D" uid="uid://ckyrl2q2o2rcp" path="res://art/DungeonSprites/Dungeon_Spritesheet.png" id="4_ymwx8"]
 [ext_resource type="PackedScene" uid="uid://c12e8fhtnpdc5" path="res://user_interface/user_interface.tscn" id="6_qf6wh"]
@@ -216,16 +217,20 @@ z_index = -5
 tile_map_data = PackedByteArray("AAABAAEAAAAHAAAAAAABAAIAAAAHAAAAAAABAAMAAAAHAAAAAAABAAQAAAAHAAAAAAABAAUAAAAHAAAAAAACAAEAAAAHAAAAAAACAAIAAAAHAAAAAAACAAMAAAAHAAAAAAACAAQAAAAHAAAAAAACAAUAAAAHAAAAAAADAAEAAAAHAAAAAAADAAIAAAAHAAAAAAADAAMAAAAHAAAAAAADAAQAAAAHAAAAAAADAAUAAAAHAAAAAAAEAAEAAAAHAAAAAAAEAAIAAAAHAAAAAAAEAAMAAAAHAAAAAAAEAAQAAAAHAAAAAAAEAAUAAAAHAAAAAAAFAAEAAAAHAAAAAAAFAAIAAAAHAAAAAAAFAAMAAAAHAAAAAAAFAAQAAAAHAAAAAAAFAAUAAAAHAAAAAAAGAAEAAAAHAAAAAAAGAAIAAAAHAAAAAAAGAAMAAAAHAAAAAAAGAAQAAAAHAAAAAAAGAAUAAAAHAAAAAAAHAAEAAAAHAAAAAAAHAAIAAAAHAAAAAAAHAAMAAAAHAAAAAAAHAAQAAAAHAAAAAAAHAAUAAAAHAAAAAAAIAAIAAAALAAAAAAAIAAMAAAALAAAAAAAIAAQAAAAHAAAAAAAIAAUAAAAHAAAAAAAJAAEAAAAHAAAAAAAJAAIAAAANAAAAAEAJAAMAAAANAAAAAGAJAAQAAAAHAAAAAAAJAAUAAAAHAAAAAAAKAAEAAAAMAAAAAAAKAAIAAAAKAAEAABAKAAMAAAAHAAAAAAAKAAQAAAAHAAAAAAAKAAUAAAAFAAAAAAAIAAEAAAAHAAAAAAAAAAYAAAAJAAAAAAALAAYAAAAJAAAAAAALAAAAAAAJAAAAAAAAAAAAAAAJAAAAAAALAAUAAAACAAEAAAALAAQAAAACAAEAAAALAAMAAAACAAEAAAALAAIAAAACAAEAAAALAAEAAAACAAEAAAAKAAAAAAACAAEAAGAJAAAAAAACAAEAAGAIAAAAAAACAAEAAGAHAAAAAAACAAEAAGAGAAAAAAACAAEAAGAFAAAAAAACAAEAAGAEAAAAAAACAAEAAGADAAAAAAACAAEAAGACAAAAAAACAAEAAGABAAAAAAACAAEAAGAAAAEAAAACAAEAADAAAAIAAAACAAEAADAAAAMAAAACAAEAADAAAAQAAAACAAEAADAAAAUAAAACAAEAADAEAAYAAAACAAEAAFADAAYAAAACAAEAAFACAAYAAAACAAEAAFABAAYAAAACAAEAAFAIAAYAAAACAAEAAFAJAAYAAAACAAEAAFAKAAYAAAACAAEAAFAHAAYAAAAJAAAAAAAFAAYAAAAJAAAAAAAGAAYAAAAGAAAAAAA=")
 tile_set = SubResource("TileSet_4sx37")
 
-[node name="AviaTrigger" type="Area2D" parent="Avia\'s Customs" unique_id=756587672 node_paths=PackedStringArray("avia", "avia_customs")]
+[node name="CustomsTrigger" type="Area2D" parent="Avia\'s Customs" unique_id=756587672 node_paths=PackedStringArray("avia", "avia_customs")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("4_rkxjk")
 avia = NodePath("../../Avia")
 avia_customs = NodePath("..")
 
-[node name="CustomsShape" type="CollisionShape2D" parent="Avia\'s Customs/AviaTrigger" unique_id=906729292]
+[node name="CustomsShape" type="CollisionShape2D" parent="Avia\'s Customs/CustomsTrigger" unique_id=906729292]
 position = Vector2(96, 56)
 shape = SubResource("RectangleShape2D_im203")
+
+[node name="CustomsMusic" type="AudioStreamPlayer2D" parent="Avia\'s Customs/CustomsTrigger/CustomsShape" unique_id=1811085854]
+position = Vector2(-96, -56)
+stream = ExtResource("4_qf6wh")
 
 [node name="Avia" type="TileMapLayer" parent="." unique_id=208141079]
 z_index = -5

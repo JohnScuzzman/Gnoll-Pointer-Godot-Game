@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ckp1st10fymkt"
+path="res://.godot/imported/Tradition Among Birds.mp3-ae341cb3c6e621d07c7ddb026ae11d0d.mp3str"
+
+[deps]
+
+source_file="res://music/Tradition Among Birds.mp3"
+dest_files=["res://.godot/imported/Tradition Among Birds.mp3-ae341cb3c6e621d07c7ddb026ae11d0d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
