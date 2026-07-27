@@ -13,8 +13,12 @@ var armor_value = 0
 
 func _ready():
 	add_to_group("enemy")
+	gravity_scale = 0
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	collision_shape.position = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 
 func on_hit(value):
 	value -= armor_value

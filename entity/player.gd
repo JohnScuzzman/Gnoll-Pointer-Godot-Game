@@ -1,12 +1,16 @@
 extends BaseEntity
 
 @onready var sprite = $Sprite2D
+@onready var collision_shape = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
 func _ready():
 	add_to_group("player")
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	collision_shape.position = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 
 func try_move_or_colide(input_direction):
 	var new_player_position: Vector2
