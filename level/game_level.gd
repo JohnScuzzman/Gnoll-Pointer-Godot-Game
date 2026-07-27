@@ -17,6 +17,9 @@ var player_race: Resource
 var active_enemies: Array
 var is_player_turn: bool = true
 
+var events_container: BoxContainer
+var event_box_scroll_container: ScrollContainer
+
 #Delete this later DebugValue
 var turn = 1
 
@@ -40,7 +43,10 @@ func _ready() -> void:
 	
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
 	
-	print("Start of turn ", turn)
+	event_box_scroll_container = user_interface.get_node("EventBoxContainer/EventBoxScrollContainer")
+	events_container = event_box_scroll_container.get_node("EventsContainer")
+	
+	add_event_log("Start of turn " + str(turn))
 
 func update_ui():
 		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + \
@@ -64,11 +70,11 @@ func _physics_process(_delta: float) -> void:
 			var player_collision = player.try_move_or_colide(input_direction)
 			if (player_collision != null):
 				if player_collision.is_in_group("enemy"):
-					print("Colided with an enemy")
+					add_event_log("Player colided with an enemy")
 					player_collision.on_hit(1)
 					end_player_turn()
 				else:
-					print("Colided with an obstacle")
+					add_event_log("Player colided with an obstacle")
 			else:
 				end_player_turn()
 
@@ -95,7 +101,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			active_enemies.append(test_enemy)
 
 func end_player_turn():
-	print("End of player turn")
+	add_event_log("End of player turn")
 	is_player_turn = false
 	turn_timer.start(turn_cooldown)
 	
@@ -103,16 +109,22 @@ func _on_turn_timer_timeout() -> void:
 	enemy_turn()
 	
 func enemy_turn(): 
-	print("Start of enemy turn")
+	add_event_log("Start of enemy turn")
 	
 	for active_enemy in active_enemies:
 		var enemy_collision = active_enemy.execute_turn(player)
 		if (enemy_collision != null && enemy_collision.is_in_group("player")):
-			print("Enemy colided with player")
+			add_event_log("Enemy colided with player")
 			player.on_hit(1)
 	
 	# This is for debug delete eventually
-	print("End of enemy turn")
+	add_event_log("End of enemy turn")
 	turn += 1
-	print("Start of turn ", turn)
+	add_event_log("Start of turn " + str(turn))
 	is_player_turn = true
+	
+func add_event_log(message):
+	var new_log = Label.new()
+	new_log.text = message
+	events_container.add_child(new_log)
+	event_box_scroll_container.scroll_vertical = int(event_box_scroll_container.get_v_scroll_bar().max_value)

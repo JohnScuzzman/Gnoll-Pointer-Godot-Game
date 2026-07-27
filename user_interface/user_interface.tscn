@@ -20,3 +20,28 @@ offset_top = -23.0
 offset_right = 40.0
 grow_vertical = 0
 text = "Controls: Move WASD ←↑→↓  Rest: ~ Interact: F DebugSpawnEnemy: M DebugSkipTurn: N"
+
+[node name="EventBoxContainer" type="VBoxContainer" parent="." unique_id=1686678449]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -293.0
+offset_top = -166.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="EventBoxTitle" type="Label" parent="EventBoxContainer" unique_id=972855810]
+layout_mode = 2
+text = "Event Logs"
+horizontal_alignment = 1
+
+[node name="EventBoxScrollContainer" type="ScrollContainer" parent="EventBoxContainer" unique_id=1412520420]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EventsContainer" type="VBoxContainer" parent="EventBoxContainer/EventBoxScrollContainer" unique_id=2080395508]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
