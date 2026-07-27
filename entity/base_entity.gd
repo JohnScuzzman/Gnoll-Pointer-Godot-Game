@@ -8,4 +8,4 @@ extends CharacterBody2D
 @export var equiped_ammo: GlobalEnums.AmmoTypes
 @export var character_class: CharacterClass
 @export var inventory: Array[Item]
-@export var race: GlobalEnums.Races
+@export var race: Stats
