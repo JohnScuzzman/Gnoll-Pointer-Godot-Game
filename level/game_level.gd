@@ -66,10 +66,11 @@ func _physics_process(_delta: float) -> void:
 				if player_collision.is_in_group("enemy"):
 					print("Colided with an enemy")
 					player_collision.on_hit(1)
+					end_player_turn()
 				else:
 					print("Colided with an obstacle")
-			
-			end_player_turn()
+			else:
+				end_player_turn()
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (is_player_turn && event.is_action_pressed("rest") || 
