@@ -1,10 +1,10 @@
 extends Node2D
 
-@export var player_input_cooldown : float = 0.1
+@export var turn_cooldown : float = 0.1
 @export var user_interface: CanvasLayer
 @export var main_camera: Camera2D
 
-@onready var player_input_cooldown_timer = $PlayerInputCooldown
+@onready var turn_timer = $TurnTimer
 
 const PLAYER_SCENE = preload("res://entity/player.tscn")
 const ENEMY_EXAMPLE_SCENE = preload("res://entity/enemy_example.tscn")
@@ -35,7 +35,7 @@ func _physics_process(_delta: float) -> void:
 	if (turns_to_skip > 0):
 		print("Player turn skipped")
 		turns_to_skip -= 1
-		enemy_turn()
+		turn_timer.start(turn_cooldown)
 	
 	var input_direction = Vector2(
 			Input.get_action_strength("right") - Input.get_action_strength("left"),
@@ -43,7 +43,6 @@ func _physics_process(_delta: float) -> void:
 			
 	if (is_player_turn == true && input_direction != Vector2.ZERO):
 		is_player_turn = false
-		player_input_cooldown_timer.start(player_input_cooldown)
 		
 		var player_collision = player.try_move_or_colide(input_direction)
 		if (player_collision != null):
@@ -56,14 +55,13 @@ func _physics_process(_delta: float) -> void:
 				print("Colided with an obstacle")
 		
 		print("End of player turn")
-		enemy_turn()
+		turn_timer.start(turn_cooldown)
 
 func _unhandled_input(event: InputEvent) -> void:
 	if (is_player_turn && event.is_action_pressed("rest") || 
 		event.is_action_pressed("interact") || event.is_action_pressed("spawn")):
 			
 		is_player_turn = false
-		player_input_cooldown_timer.start(player_input_cooldown)
 		
 		if event.is_action_pressed("rest"):
 			turns_to_skip = 2;
@@ -79,10 +77,10 @@ func _unhandled_input(event: InputEvent) -> void:
 			active_enemies.append(test_enemy)
 		
 		print("End of player turn")
-		enemy_turn()
-
-func spawn_enemy() -> void:
-	is_player_turn = true
+		turn_timer.start(turn_cooldown)
+	
+func _on_turn_timer_timeout() -> void:
+	enemy_turn()
 	
 # TODO : There is a weird behaviour where the enemy can end up under the player 
 # as like its trying to move even tho its dead. Investigate
@@ -97,6 +95,4 @@ func enemy_turn():
 	print("End of enemy turn")
 	turn += 1
 	print("Start of turn ", turn)
-
-func _on_player_input_cooldown_timeout() -> void:
 	is_player_turn = true
