@@ -27,7 +27,7 @@ func is_alive():
 func on_death():
 	game_level_reference.active_enemies.erase(self)
 	sprite.texture = death_texture
-	collision_shape.set_deferred("disabled",true)
+	collision_shape.disabled = true
 	remove_from_group("enemy")
 	add_to_group("interactable")
 
