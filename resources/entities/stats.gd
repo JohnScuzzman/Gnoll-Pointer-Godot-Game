@@ -1,6 +1,7 @@
 class_name Stats
 extends Resource
 
+@export var name: String
 @export var attack: int
 @export var charisma: int
 @export var constitution: int
