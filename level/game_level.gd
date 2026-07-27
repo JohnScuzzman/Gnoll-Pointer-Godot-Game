@@ -23,7 +23,7 @@ var turn = 1
 
 func _ready() -> void:
 	player = PLAYER_SCENE.instantiate()
-	player.global_position = Vector2(64,64)
+	player.global_position = Vector2(GlobalVariable.tile_size * 3, GlobalVariable.tile_size * 3)
 	add_child(player)
 	
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
@@ -71,7 +71,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			
 		if event.is_action_pressed("spawn"):
 			var test_enemy = ENEMY_EXAMPLE_SCENE.instantiate()
-			test_enemy.global_position = Vector2(player.global_position.x + 64, player.global_position.y)
+			test_enemy.global_position = Vector2(player.global_position.x + (GlobalVariable.tile_size * 3), player.global_position.y)
 			test_enemy.game_level_reference = self
 			add_child(test_enemy)
 			active_enemies.append(test_enemy)
