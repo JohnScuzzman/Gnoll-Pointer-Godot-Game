@@ -61,7 +61,7 @@ func initialize_astar() -> void:
 	for layer in find_children("", "TileMapLayer", true, false):
 		for cell in layer.get_used_cells():
 			var tile_data = layer.get_cell_tile_data(cell)
-			if tile_data and tile_data.get_collision_polygons_count(0) > 0:
+			if tile_data && tile_data.get_collision_polygons_count(0) > 0:
 				astar.set_point_solid(cell, true)
 
 func update_ui():
