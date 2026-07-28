@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3ujvby0q4ypl"
-path="res://.godot/imported/Dungeon_Spritesheet.png-43981a04ad93edaa92be50eba7a03ec5.ctex"
+uid="uid://ckyrl2q2o2rcp"
+path="res://.godot/imported/Town_Spritesheet.png-efb7cb6e5b384521727d399a5239ed9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/DungeonSprites/Dungeon_Spritesheet.png"
-dest_files=["res://.godot/imported/Dungeon_Spritesheet.png-43981a04ad93edaa92be50eba7a03ec5.ctex"]
+source_file="res://art/TownSprites/Town_Spritesheet.png"
+dest_files=["res://.godot/imported/Town_Spritesheet.png-efb7cb6e5b384521727d399a5239ed9c.ctex"]
 
 [params]
 
