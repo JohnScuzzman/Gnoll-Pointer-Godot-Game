@@ -17,11 +17,11 @@ size = Vector2(1012.5, 692)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pw7k6"]
 size = Vector2(709, 431.5)
 
-[node name="GameLevel" type="Node2D" unique_id=379133356 node_paths=PackedStringArray("user_interface", "main_camera", "tile_map_layer")]
+[node name="GameLevel" type="Node2D" unique_id=379133356 node_paths=PackedStringArray("user_interface", "main_camera", "tile_map_layer_floor")]
 script = ExtResource("1_komg3")
 user_interface = NodePath("UserInterface")
 main_camera = NodePath("Camera2D")
-tile_map_layer = NodePath("Avia\'s Customs")
+tile_map_layer_floor = NodePath("Avia")
 
 [node name="Avia\'s Customs" type="TileMapLayer" parent="." unique_id=751716932]
 z_index = -5
