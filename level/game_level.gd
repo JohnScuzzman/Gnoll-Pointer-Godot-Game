@@ -50,10 +50,10 @@ func _ready() -> void:
 	print("Start of turn " + str(turn))
 
 func update_ui():
-		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + \
-			" Class: " + str(player.character_class.name) + \
-			" Race: " + str(player.race.name) + \
-			" HP: " + str(player.stats.health_points)
+		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + "\n" + \
+			"Class: " + str(player.character_class.name) + "\n" + \
+			"Race: " + str(player.race.name) + "\n" + \
+			"HP: " + str(player.stats.health_points)
 
 func _physics_process(_delta: float) -> void:
 	update_ui()
