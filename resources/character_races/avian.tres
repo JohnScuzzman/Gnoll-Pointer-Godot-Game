@@ -12,4 +12,5 @@ intelligence = 8
 strength = 14
 wisdom = 10
 health_points = 12
+max_health_points = 12
 metadata/_custom_type_script = "uid://c3rva5ydu7iwf"

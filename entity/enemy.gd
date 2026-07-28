@@ -8,19 +8,25 @@ extends RigidBody2D
 
 var game_level_reference
 #PlaceHolder
+var entity_name = "Kobold"
 var hp = 1
 var armor_value = 0
 
 func _ready():
 	add_to_group("enemy")
-	sprite.offset = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
-	shape_cast.position = Vector2(GlobalVariable.tile_size / 2, GlobalVariable.tile_size / 2)
+	gravity_scale = 0
+	sprite.offset = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	shape_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 
 func on_hit(value):
 	value -= armor_value
 	hp -= value
 	if !is_alive():
 		on_death()
+	return value
 		
 func is_alive():
 	return hp > 0
@@ -45,18 +51,18 @@ func execute_turn(player):
 		if abs(direction.x) > abs(direction.y):
 			if direction.x > 0: 
 				sprite.flip_h = true
-				shape_cast.target_position = Vector2((GlobalVariable.tile_size / 2), 0)
+				shape_cast.target_position = Vector2((GlobalVariable.tile_size / 2.0), 0)
 				new_position = get_rounded_vector2(global_position.x + GlobalVariable.tile_size, global_position.y)
 			else: 
 				sprite.flip_h = false
-				shape_cast.target_position = Vector2(-(GlobalVariable.tile_size / 2), 0)
+				shape_cast.target_position = Vector2(-(GlobalVariable.tile_size / 2.0), 0)
 				new_position = get_rounded_vector2(global_position.x - GlobalVariable.tile_size, global_position.y)
 		else:
 			if direction.y > 0: 
-				shape_cast.target_position = Vector2(0, (GlobalVariable.tile_size / 2))
+				shape_cast.target_position = Vector2(0, (GlobalVariable.tile_size / 2.0))
 				new_position = get_rounded_vector2(global_position.x, global_position.y + GlobalVariable.tile_size)
 			else: 
-				shape_cast.target_position = Vector2(0, -(GlobalVariable.tile_size / 2))
+				shape_cast.target_position = Vector2(0, -(GlobalVariable.tile_size / 2.0))
 				new_position = get_rounded_vector2(global_position.x, global_position.y - GlobalVariable.tile_size)
 		
 		shape_cast.force_shapecast_update()
