@@ -1,6 +1,7 @@
 extends Area2D
 
 @export var avia: TileMapLayer
+@export var avias_roofs: TileMapLayer
 @export var chiisiis_house: TileMapLayer
 @export var room_name: String = "Chii'sii's House"
 @export var is_cleared: bool = false
@@ -19,6 +20,7 @@ func _on_player_entered(body: Node2D) -> void:
 		# Fades visibility in, rather than swapping it jarringly
 		chiisiis_house.visible = true
 		avia.visible = false
+		avias_roofs.visible = false
 		# Trigger some kind of camera tomfoolery here, or reduce player FOV, etc.
 
 func _on_player_exited(body: Node2D) -> void:
@@ -26,3 +28,4 @@ func _on_player_exited(body: Node2D) -> void:
 		print("Left " + room_name)
 		chiisiis_house.visible = false
 		avia.visible = true
+		avias_roofs.visible = true

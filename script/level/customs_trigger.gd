@@ -1,7 +1,7 @@
 extends Area2D
 
 @export var avia: TileMapLayer
-@export var avia_customs: TileMapLayer
+@export var avias_roofs: TileMapLayer
 @export var room_name: String = "Avia's Customs"
 @export var is_cleared: bool = false
 @onready var customs_music = $CustomsShape/CustomsMusic
@@ -23,7 +23,7 @@ func _on_player_entered(body: Node2D) -> void:
 		print("Entered " + room_name)
 		# Fades visibility in, rather than swapping it jarringly
 		avia.visible = false
-		avia_customs.visible = true
+		avias_roofs.visible = false
 		customs_music.play()
 		fade_customs_volume(max_volume)
 		# Trigger some kind of camera tomfoolery here, or reduce player FOV, etc.
@@ -32,7 +32,7 @@ func _on_player_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print("Left " + room_name)
 		avia.visible = true
-		avia_customs.visible = false
+		avias_roofs.visible = true
 		fade_customs_volume(-60.0)
 
 
