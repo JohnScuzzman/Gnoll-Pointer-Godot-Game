@@ -3,7 +3,7 @@ extends Node2D
 @export var turn_cooldown : float = 0.1
 @export var user_interface: CanvasLayer
 @export var main_camera: Camera2D
-@export var tile_map_layer: TileMapLayer
+@export var tile_map_layer_floor: TileMapLayer
 
 @onready var turn_timer = $TurnTimer
 
@@ -53,16 +53,16 @@ func _ready() -> void:
 	initialize_astar()
 
 func initialize_astar() -> void:
-	var rect = tile_map_layer.get_used_rect()
-	astar.region = rect
-	astar.cell_size = tile_map_layer.tile_set.tile_size
+	astar.region = tile_map_layer_floor.get_used_rect()
+	astar.cell_size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
 	astar.update()
-
-	for cell in tile_map_layer.get_used_cells():
-		var tile_data = tile_map_layer.get_cell_tile_data(cell)
-		if tile_data and tile_data.get_collision_polygons_count(0) > 0:
-			astar.set_point_solid(cell, true)
+		
+	for layer in find_children("", "TileMapLayer", true, false):
+		for cell in layer.get_used_cells():
+			var tile_data = layer.get_cell_tile_data(cell)
+			if tile_data and tile_data.get_collision_polygons_count(0) > 0:
+				astar.set_point_solid(cell, true)
 
 func update_ui():
 		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + "\n" + \
