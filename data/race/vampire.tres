@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://cj3fyrgph34rm"]
+
+[ext_resource type="Script" uid="uid://c3rva5ydu7iwf" path="res://script/model/entity/stats.gd" id="1_gutgf"]
+
+[resource]
+script = ExtResource("1_gutgf")
+name = "Vampire"
+charisma = 16
+constitution = 10
+dexterity = 12
+intelligence = 14
+strength = 10
+wisdom = 10
+health_points = 10
+max_health_points = 10
+metadata/_custom_type_script = "uid://c3rva5ydu7iwf"

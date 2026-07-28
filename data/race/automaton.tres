@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://bqqyt1arqo3n2"]
+
+[ext_resource type="Script" uid="uid://c3rva5ydu7iwf" path="res://script/model/entity/stats.gd" id="1_aarl1"]
+
+[resource]
+script = ExtResource("1_aarl1")
+name = "Automaton"
+charisma = 10
+constitution = 16
+dexterity = 10
+intelligence = 12
+strength = 14
+wisdom = 10
+health_points = 10
+max_health_points = 10
+metadata/_custom_type_script = "uid://c3rva5ydu7iwf"

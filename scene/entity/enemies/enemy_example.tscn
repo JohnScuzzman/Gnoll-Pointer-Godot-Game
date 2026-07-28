@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://c8xr027art8oh"]
+
+[ext_resource type="Script" uid="uid://bkcyj07u6insp" path="res://script/entity/enemy.gd" id="1_six12"]
+[ext_resource type="Texture2D" uid="uid://b4j3sarcnk47r" path="res://art/sprite/enemy/rat.png" id="2_xqrf6"]
+[ext_resource type="Texture2D" uid="uid://bp75ii1kdku3f" path="res://art/sprite/enemy/kobold.png" id="3_2uwqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvgj6"]
+
+[node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
+gravity_scale = 0.0
+script = ExtResource("1_six12")
+death_texture = ExtResource("2_xqrf6")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1387523516]
+texture = ExtResource("3_2uwqk")
+offset = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280890054]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_yh4yq")
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=780018180]
+shape = SubResource("RectangleShape2D_qvgj6")

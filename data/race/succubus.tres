@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="Stats" format=3 uid="uid://cmsr72vcmgbhd"]
+
+[ext_resource type="Script" uid="uid://c3rva5ydu7iwf" path="res://script/model/entity/stats.gd" id="1_1qtpw"]
+
+[resource]
+script = ExtResource("1_1qtpw")
+name = "Sccubus"
+charisma = 16
+constitution = 10
+dexterity = 12
+intelligence = 14
+strength = 8
+wisdom = 12
+health_points = 8
+max_health_points = 8
+metadata/_custom_type_script = "uid://c3rva5ydu7iwf"
