@@ -7,6 +7,7 @@ extends RigidBody2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
 var game_level_reference
+var astar: AStarGrid2D
 #PlaceHolder
 var entity_name = "Kobold"
 var hp = 1
@@ -38,42 +39,40 @@ func on_death():
 	remove_from_group("enemy")
 	add_to_group("interactable")
 
-# TODO : Use the global variable instead
 func execute_turn(player):
 	if (is_alive):
 		shape_cast.target_position = Vector2.ZERO
 		shape_cast.force_shapecast_update()
 		
-		var new_position: Vector2
-		
-		# TODO : Implement actual path finding instead of going for the player only
-		var direction = global_position.direction_to(player.global_position)
-		if abs(direction.x) > abs(direction.y):
-			if direction.x > 0: 
+		var next_move = get_next_move(
+			Vector2(global_position.x / GlobalVariable.tile_size, global_position.y / GlobalVariable.tile_size),
+			Vector2(player.global_position.x / GlobalVariable.tile_size, player.global_position.y / GlobalVariable.tile_size))
+
+		if (next_move != null):
+			var move_dif = next_move - global_position
+			if move_dif.x > 0: 
 				sprite.flip_h = true
 				shape_cast.target_position = Vector2((GlobalVariable.tile_size / 2.0), 0)
-				new_position = get_rounded_vector2(global_position.x + GlobalVariable.tile_size, global_position.y)
-			else: 
+			elif(move_dif.x < 0): 
 				sprite.flip_h = false
 				shape_cast.target_position = Vector2(-(GlobalVariable.tile_size / 2.0), 0)
-				new_position = get_rounded_vector2(global_position.x - GlobalVariable.tile_size, global_position.y)
-		else:
-			if direction.y > 0: 
+			elif move_dif.y > 0: 
 				shape_cast.target_position = Vector2(0, (GlobalVariable.tile_size / 2.0))
-				new_position = get_rounded_vector2(global_position.x, global_position.y + GlobalVariable.tile_size)
 			else: 
 				shape_cast.target_position = Vector2(0, -(GlobalVariable.tile_size / 2.0))
-				new_position = get_rounded_vector2(global_position.x, global_position.y - GlobalVariable.tile_size)
-		
-		shape_cast.force_shapecast_update()
-		
-		if shape_cast.is_colliding():
-			return shape_cast.get_collider(0)
-		else:
-			global_position = new_position
 			
+			shape_cast.force_shapecast_update()
+			
+			if shape_cast.is_colliding():
+				return shape_cast.get_collider(0)
+			else:
+				global_position = next_move
+				
 	return null
 
-# TODO : Use the global variable instead
-func get_rounded_vector2(x, y) -> Vector2:
-	return Vector2(round(x / GlobalVariable.tile_size) * GlobalVariable.tile_size, round(y / GlobalVariable.tile_size) * GlobalVariable.tile_size)
+func get_next_move(start: Vector2i, target: Vector2i):
+	if astar.is_in_bounds(start.x, start.y) && astar.is_in_bounds(target.x, target.y):
+		var moves_to_target = astar.get_point_path(start, target)
+		if (astar.get_point_path(start, target).size() > 1):
+			return moves_to_target[1]
+	return null

@@ -7,8 +7,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
 size = Vector2(16, 16)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_shqcg"]
-size = Vector2(8, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvgj6"]
 
 [node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
 gravity_scale = 0.0
@@ -23,7 +22,5 @@ offset = Vector2(8, 8)
 position = Vector2(8, 8)
 shape = SubResource("RectangleShape2D_yh4yq")
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=146593523]
-position = Vector2(8, 8)
-shape = SubResource("RectangleShape2D_shqcg")
-target_position = Vector2(0, 0)
+[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=780018180]
+shape = SubResource("RectangleShape2D_qvgj6")

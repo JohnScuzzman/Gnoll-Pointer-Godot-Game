@@ -3,6 +3,7 @@ extends Node2D
 @export var turn_cooldown : float = 0.1
 @export var user_interface: CanvasLayer
 @export var main_camera: Camera2D
+@export var tile_map_layer: TileMapLayer
 
 @onready var turn_timer = $TurnTimer
 
@@ -19,6 +20,7 @@ var is_player_turn: bool = true
 
 var events_container: BoxContainer
 var event_box_scroll_container: ScrollContainer
+var astar: AStarGrid2D = AStarGrid2D.new()
 
 #Delete this later DebugValue
 var turn = 1
@@ -48,6 +50,19 @@ func _ready() -> void:
 	events_container = event_box_scroll_container.get_node("EventsContainer")
 	
 	print("Start of turn " + str(turn))
+	initialize_astar()
+
+func initialize_astar() -> void:
+	var rect = tile_map_layer.get_used_rect()
+	astar.region = rect
+	astar.cell_size = tile_map_layer.tile_set.tile_size
+	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar.update()
+
+	for cell in tile_map_layer.get_used_cells():
+		var tile_data = tile_map_layer.get_cell_tile_data(cell)
+		if tile_data and tile_data.get_collision_polygons_count(0) > 0:
+			astar.set_point_solid(cell, true)
 
 func update_ui():
 		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + "\n" + \
@@ -98,6 +113,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			var test_enemy = ENEMY_EXAMPLE_SCENE.instantiate()
 			test_enemy.global_position = Vector2(player.global_position.x + (GlobalVariable.tile_size * 3), player.global_position.y)
 			test_enemy.game_level_reference = self
+			test_enemy.astar = astar
 			add_child(test_enemy)
 			active_enemies.append(test_enemy)
 
@@ -130,4 +146,4 @@ func add_event_log(message):
 	events_container.add_child(new_log)
 	# TODO: This technically locks the entire game for a single frame using a signal would be better
 	await get_tree().process_frame
-	event_box_scroll_container.scroll_vertical = event_box_scroll_container.get_v_scroll_bar().max_value
+	event_box_scroll_container.scroll_vertical = int(event_box_scroll_container.get_v_scroll_bar().max_value)
