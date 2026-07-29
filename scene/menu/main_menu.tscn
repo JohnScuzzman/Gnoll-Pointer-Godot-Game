@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://mu67aofe144l"]
 
 [ext_resource type="Script" uid="uid://dubnt5tfupguc" path="res://script/controller/main_menu_controller.gd" id="1_xr5np"]
-[ext_resource type="Texture2D" uid="uid://chamo7j4il2g4" path="res://art/sprite/menu/background.png" id="2_123lf"]
+[ext_resource type="Texture2D" uid="uid://chamo7j4il2g4" path="res://art/sprite/menu/Background.png" id="2_123lf"]
 [ext_resource type="Texture2D" uid="uid://cja1yfvfdqr7e" path="res://art/sprite/menu/game_logo.png" id="3_1j8a1"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q7hnt"]
@@ -27,6 +27,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_xr5np")
 play_button = NodePath("MainContainer/ButtonContainer/PlayButton")
 quit_button = NodePath("MainContainer/ButtonContainer/QuitButton")
@@ -60,10 +62,10 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -544.5
-offset_top = -217.5
-offset_right = 544.5
-offset_bottom = 217.5
+offset_left = -416.0
+offset_top = -270.0
+offset_right = 416.0
+offset_bottom = 270.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 10
@@ -71,6 +73,7 @@ theme_override_constants/separation = 10
 [node name="GameLogo" type="TextureRect" parent="MainContainer" unique_id=1697153281]
 layout_mode = 2
 texture = ExtResource("3_1j8a1")
+stretch_mode = 3
 
 [node name="ButtonContainer" type="HBoxContainer" parent="MainContainer" unique_id=380478281]
 layout_mode = 2
