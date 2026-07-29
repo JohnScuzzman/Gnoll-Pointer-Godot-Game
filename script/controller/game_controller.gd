@@ -84,7 +84,7 @@ func _physics_process(_delta: float) -> void:
 					Input.get_action_strength("down") - Input.get_action_strength("up"))
 					
 			if (input_direction != Vector2.ZERO):
-				var player_collision: CollisionObject2D = player.try_move_or_colide(input_direction)
+				var player_collision: Object = player.try_move_or_colide(input_direction)
 				if (player_collision != null):
 					if player_collision.is_in_group("enemy"):
 						print("Player colided with an enemy")
@@ -130,7 +130,7 @@ func enemy_turn() -> void:
 	print("Start of enemy turn")
 	
 	for active_enemy: Node in active_enemies:
-		var enemy_collision: CollisionObject2D = active_enemy.execute_turn(player)
+		var enemy_collision: Object = active_enemy.execute_turn(player)
 		if (enemy_collision != null && enemy_collision.is_in_group("player")):
 			user_interface.add_event_log(active_enemy.entity_name + " hit you for " + str(player.on_hit(1)) +  " damage")
 					

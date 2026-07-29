@@ -49,16 +49,17 @@ func on_death() -> void:
 	remove_from_group("enemy")
 	add_to_group("interactable")
 
-func execute_turn(player: Node) -> CollisionObject2D:
+func execute_turn(player: Node) -> Object:
 	if (!is_dead):
 		shape_cast.target_position = Vector2.ZERO
 		shape_cast.force_shapecast_update()
 		
-		var next_move: Vector2 = get_next_move(
+		var possible_next_move: Variant = get_next_move(
 			Vector2(global_position.x / GlobalVariable.tile_size, global_position.y / GlobalVariable.tile_size),
 			Vector2(player.global_position.x / GlobalVariable.tile_size, player.global_position.y / GlobalVariable.tile_size))
 
-		if (next_move != null):
+		if (possible_next_move != null):
+			var next_move: Vector2 = possible_next_move
 			var move_dif: Vector2 = next_move - global_position
 			if move_dif.x > 0: 
 				sprite.flip_h = true
