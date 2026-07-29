@@ -1,14 +1,18 @@
 extends RigidBody2D
 
 @export var death_texture : Texture2D
+@export var aggro_area_size : float
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
+@onready var ray_cast: RayCast2D = $LineOfSightRayCast2D
+@onready var aggro_area: Area2D = $AggroArea2D
+@onready var aggro_radius: CollisionShape2D
 
 var game_level_reference: Node
-var astar: AStarGrid2D
 
+var player_in_aggro_area: bool = false
 var is_dead: bool = false
 
 #PlaceHolder
@@ -18,13 +22,32 @@ var hp: int = hp_max
 var armor_value: int = 0
 
 func _ready() -> void:
+	game_level_reference = get_node("/root/GameLevel")
 	add_to_group("enemy")
 	gravity_scale = 0
+	global_position = get_rounded_vector2(global_position.x, global_position.y)
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	shape_cast.target_position = Vector2.ZERO
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	ray_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	ray_cast.target_position = Vector2.ZERO
+	aggro_area.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	aggro_radius = aggro_area.get_node("AggroRadiusShape2D")
+	aggro_radius.shape.size = Vector2(GlobalVariable.tile_size * aggro_area_size, GlobalVariable.tile_size * aggro_area_size)
+	
+func _physics_process(_delta: float) -> void:
+	if (player_in_aggro_area):
+		ray_cast.target_position = ray_cast.to_local(game_level_reference.player.global_position)
+
+		if ray_cast.is_colliding():
+			var collider: Object = ray_cast.get_collider()
+			if collider.is_in_group("player"):
+				game_level_reference.add_enemy_as_active(self)
+	else:
+		game_level_reference.remove_enemy_as_active(self)
 
 func on_hit(value: int) -> int:
 	value -= armor_value
@@ -49,16 +72,17 @@ func on_death() -> void:
 	remove_from_group("enemy")
 	add_to_group("interactable")
 
-func execute_turn(player: Node) -> CollisionObject2D:
+func execute_turn(player: Node) -> Object:
 	if (!is_dead):
 		shape_cast.target_position = Vector2.ZERO
 		shape_cast.force_shapecast_update()
 		
-		var next_move: Vector2 = get_next_move(
+		var possible_next_move: Variant = get_next_move(
 			Vector2(global_position.x / GlobalVariable.tile_size, global_position.y / GlobalVariable.tile_size),
 			Vector2(player.global_position.x / GlobalVariable.tile_size, player.global_position.y / GlobalVariable.tile_size))
 
-		if (next_move != null):
+		if (possible_next_move != null):
+			var next_move: Vector2 = possible_next_move
 			var move_dif: Vector2 = next_move - global_position
 			if move_dif.x > 0: 
 				sprite.flip_h = true
@@ -81,8 +105,19 @@ func execute_turn(player: Node) -> CollisionObject2D:
 	return null
 
 func get_next_move(start: Vector2i, target: Vector2i) -> Variant:
-	if astar.is_in_bounds(start.x, start.y) && astar.is_in_bounds(target.x, target.y):
-		var moves_to_target: PackedVector2Array = astar.get_point_path(start, target)
-		if (astar.get_point_path(start, target).size() > 1):
+	if game_level_reference.astar.is_in_bounds(start.x, start.y) && game_level_reference.astar.is_in_bounds(target.x, target.y):
+		var moves_to_target: PackedVector2Array = game_level_reference.astar.get_point_path(start, target)
+		if (game_level_reference.astar.get_point_path(start, target).size() > 1):
 			return moves_to_target[1]
 	return null
+
+func get_rounded_vector2(x: float, y: float) -> Vector2:
+	return Vector2(round(x / GlobalVariable.tile_size) * GlobalVariable.tile_size, round(y / GlobalVariable.tile_size) * GlobalVariable.tile_size)
+
+func _on_aggro_area_2d_body_entered(body: Node2D) -> void:
+	if (body.is_in_group("player")):
+		player_in_aggro_area = true
+
+func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
+	if (body.is_in_group("player")):
+		player_in_aggro_area = false

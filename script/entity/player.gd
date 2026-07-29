@@ -20,7 +20,7 @@ func _ready() -> void:
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 
-func try_move_or_colide(input_direction: Vector2) -> CollisionObject2D:
+func try_move_or_colide(input_direction: Vector2) -> Object:
 	var new_player_position: Vector2
 	
 	shape_cast.target_position = Vector2.ZERO
