@@ -10,6 +10,7 @@ extends Node2D
 const PLAYER_SCENE = preload("res://scene/entity/player.tscn")
 const ENEMY_EXAMPLE_SCENE = preload("res://scene/entity/enemies/enemy_example.tscn")
 
+var is_scene_ready: bool = false
 var player: BaseEntity
 var player_name: String
 var player_class: Resource
@@ -125,7 +126,18 @@ func end_player_turn() -> void:
 	
 func _on_turn_timer_timeout() -> void:
 	enemy_turn()
-	
+
+# TODO : Probably move enemy state into state
+func add_enemy_as_active(enemy: Node) -> void:
+	if (!active_enemies.has(enemy)):
+		active_enemies.append(enemy)
+
+# TODO : Probably move enemy state into state
+func remove_enemy_as_active(enemy: Node) -> void:
+	if (active_enemies.has(enemy)):
+		active_enemies.erase(enemy)
+
+# TODO : Probably decouple this logic and move it into enemy its detrimental here
 func enemy_turn() -> void: 
 	print("Start of enemy turn")
 	

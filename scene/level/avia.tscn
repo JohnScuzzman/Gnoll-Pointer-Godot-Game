@@ -8,6 +8,7 @@
 [ext_resource type="TileSet" uid="uid://p7jmd12i4rth" path="res://art/tile_set/roof_tileset.tres" id="5_k6xi8"]
 [ext_resource type="Script" uid="uid://calv2h58el1mn" path="res://script/level/medic_trigger.gd" id="6_gc7ot"]
 [ext_resource type="PackedScene" uid="uid://c12e8fhtnpdc5" path="res://scene/menu/user_interface.tscn" id="7_g3b3x"]
+[ext_resource type="PackedScene" uid="uid://c8xr027art8oh" path="res://scene/entity/enemies/enemy_example.tscn" id="9_nmh1o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_im203"]
 size = Vector2(642, 323)
@@ -107,5 +108,17 @@ position_smoothing_speed = 10.0
 
 [node name="TurnTimer" type="Timer" parent="." unique_id=117888192]
 one_shot = true
+
+[node name="EnemyExample" parent="." unique_id=738268757 instance=ExtResource("9_nmh1o")]
+position = Vector2(1152, 192)
+
+[node name="EnemyExample2" parent="." unique_id=1317162935 instance=ExtResource("9_nmh1o")]
+position = Vector2(1541, 199)
+
+[node name="EnemyExample3" parent="." unique_id=1512940753 instance=ExtResource("9_nmh1o")]
+position = Vector2(1402, 318)
+
+[node name="EnemyExample4" parent="." unique_id=691960021 instance=ExtResource("9_nmh1o")]
+position = Vector2(1350, 142)
 
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
