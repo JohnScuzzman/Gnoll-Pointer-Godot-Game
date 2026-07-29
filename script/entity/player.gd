@@ -2,15 +2,17 @@ extends BaseEntity
 
 @export var rest_rate: int = 1
 
-@onready var sprite = $Sprite2D
-@onready var collision_shape = $CollisionShape2D
+@onready var sprite: Sprite2D = $Sprite2D
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 
-var game_level
-var is_resting = false
-var turns_rested = 0
+var user_interface: Node
+var is_resting: bool = false
+var can_rest: bool = false
+var is_dead: bool = false
+var turns_rested: int = 0
 
-func _ready():
+func _ready() -> void:
 	add_to_group("player")
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
@@ -18,7 +20,7 @@ func _ready():
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 
-func try_move_or_colide(input_direction):
+func try_move_or_colide(input_direction: Vector2) -> CollisionObject2D:
 	var new_player_position: Vector2
 	
 	shape_cast.target_position = Vector2.ZERO
@@ -48,22 +50,30 @@ func try_move_or_colide(input_direction):
 		
 	return null
 		
-func get_rounded_vector2(x, y) -> Vector2:
+func get_rounded_vector2(x: float, y: float) -> Vector2:
 	return Vector2(round(x / GlobalVariable.tile_size) * GlobalVariable.tile_size, round(y / GlobalVariable.tile_size) * GlobalVariable.tile_size)
 	
-func on_hit(value):
+func on_hit(value: int) -> int:
 	value -= stats.armor_class
-	stats.health_points -= value
+	update_health(-value)
 	return value
 
-func can_rest():
-	return stats.health_points < stats.max_health_points
+func update_health(value: int) -> void:
+	stats.health_points += value
 	
-func on_rest():
-	stats.health_points += rest_rate
-	turns_rested += 1
-	if (stats.health_points >= stats.max_health_points):
-		game_level.add_event_log("You rested for " + str(turns_rested) + " turn(s)")
-		turns_rested = 0
+	if (stats.health_points <= 0):
+		stats.health_points = 0
+		is_dead = true
+		
+	if (stats.health_points > stats.max_health_points):
 		stats.health_points = stats.max_health_points
+		
+	can_rest = stats.health_points < stats.max_health_points
+	
+func on_rest() -> void:
+	update_health(rest_rate)
+	turns_rested += 1
+	if (!can_rest):
+		user_interface.add_event_log("You rested for " + str(turns_rested) + " turn(s)")
+		turns_rested = 0
 		is_resting = false;
