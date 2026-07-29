@@ -1,6 +1,6 @@
 extends BaseEntity
 
-@export var rest_rate = 1
+@export var rest_rate: int = 1
 
 @onready var sprite = $Sprite2D
 @onready var collision_shape = $CollisionShape2D

@@ -13,24 +13,44 @@ config_version=5
 config/name="Project Cyberlich"
 run/main_scene="uid://mu67aofe144l"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+run/max_fps=240
 
 [autoload]
 
 GlobalEnums="*uid://ce2x4hnybfcqr"
 GlobalVariable="*uid://limrbib8hbqt"
 
+[debug]
+
+gdscript/warnings/untyped_declaration=1
+
 [display]
 
+window/size/viewport_width=1280
+window/size/viewport_height=720
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [dotnet]
 
 project/assembly_name="Project Cyberlich"
 
+[file_customization]
+
+folder_colors={
+"res://art/": "red",
+"res://data/": "orange",
+"res://music/": "yellow",
+"res://scene/": "green",
+"res://script/": "blue"
+}
+
 [global_group]
 
 Player="Used for funtions that check collision with areas for music changes, visibility changes, triggering quests, etc."
+
+[gui]
+
+theme/default_font_multichannel_signed_distance_field=true
 
 [input]
 
