@@ -1,3 +1,3 @@
 extends Node
 
-var tile_size = 64
+var tile_size: int = 64

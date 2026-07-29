@@ -1,9 +1,17 @@
 [gd_scene format=3 uid="uid://c12e8fhtnpdc5"]
 
+[ext_resource type="Script" uid="uid://cykvxdej1xux" path="res://script/controller/user_interface_controller.gd" id="1_6d8lp"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og86u"]
 bg_color = Color(0.10668749, 0.10377861, 0.0950525, 0.78431374)
 
-[node name="UserInterface" type="CanvasLayer" unique_id=344285624]
+[node name="UserInterface" type="CanvasLayer" unique_id=344285624 node_paths=PackedStringArray("events_container", "event_box_scroll_container", "game_over_panel", "game_over_container", "main_menu_button")]
+script = ExtResource("1_6d8lp")
+events_container = NodePath("EventBoxContainer/EventBoxScrollContainer/EventsContainer")
+event_box_scroll_container = NodePath("EventBoxContainer/EventBoxScrollContainer")
+game_over_panel = NodePath("GameOverPanel")
+game_over_container = NodePath("GameOverContainer")
+main_menu_button = NodePath("GameOverContainer/MarginContainer2/MainMenuButton")
 
 [node name="DebugLabel" type="Label" parent="." unique_id=941189025]
 offset_left = 15.0
@@ -70,3 +78,54 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+
+[node name="GameOverPanel" type="Panel" parent="." unique_id=1956706062]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameOverContainer" type="VBoxContainer" parent="." unique_id=971158329]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -50.0
+offset_right = 100.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="GameOverContainer" unique_id=2133571425]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+
+[node name="Label" type="Label" parent="GameOverContainer/MarginContainer" unique_id=1764879635]
+layout_mode = 2
+text = "Game Over"
+horizontal_alignment = 1
+
+[node name="MarginContainer2" type="MarginContainer" parent="GameOverContainer" unique_id=2116299944]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="MainMenuButton" type="Button" parent="GameOverContainer/MarginContainer2" unique_id=31415520]
+layout_mode = 2
+text = "Main Menu"
+
+[connection signal="pressed" from="GameOverContainer/MarginContainer2/MainMenuButton" to="." method="_on_main_menu_button_pressed"]

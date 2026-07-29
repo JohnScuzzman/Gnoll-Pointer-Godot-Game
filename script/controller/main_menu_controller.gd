@@ -22,23 +22,23 @@ var classes: Array[Resource] = []
 var races: Array[Resource] = []
 
 func _ready() -> void:
-	for classKey in GlobalEnums.Clases.keys():
-		var classDef = load("res://data/class/" + classKey + ".tres")
+	for classKey: String in GlobalEnums.Clases.keys():
+		var classDef: CharacterClass = load("res://data/class/" + classKey + ".tres")
 		classes.append(classDef)
 		class_item_list.add_item(classDef.name)
 	class_item_list.select(0)
 	_on_class_item_list_item_selected(0)
 	
-	for raceKey in GlobalEnums.Races.keys():
-		var raceDef = load("res://data/race/" + raceKey + ".tres")
+	for raceKey: String in GlobalEnums.Races.keys():
+		var raceDef: Stats = load("res://data/race/" + raceKey + ".tres")
 		races.append(raceDef)
 		race_item_list.add_item(raceDef.name)
 	race_item_list.select(0)
 	_on_race_item_list_item_selected(0)
 
 func _on_start_pressed() -> void:
-	var next_scene_packed = load("res://scene/level/avia.tscn")
-	var next_scene_instance = next_scene_packed.instantiate()
+	var next_scene_packed: PackedScene = load("res://scene/level/avia.tscn")
+	var next_scene_instance: Node = next_scene_packed.instantiate()
 	next_scene_instance.player_name = name_text_edit.text
 	next_scene_instance.player_class = classes[class_item_list.get_selected_items()[0]]
 	next_scene_instance.player_race = races[race_item_list.get_selected_items()[0]]
@@ -51,7 +51,7 @@ func _on_quit_pressed() -> void:
 
 # Obviously change this to real values
 func _on_race_item_list_item_selected(index: int) -> void:
-	var racedef = races[index]
+	var racedef: Stats = races[index]
 	hp_value.text = str(racedef.health_points)
 	cha_value.text = str(racedef.charisma)
 	int_value.text = str(racedef.intelligence)
@@ -62,7 +62,7 @@ func _on_race_item_list_item_selected(index: int) -> void:
 
 # Obviously change this to real values
 func _on_class_item_list_item_selected(index: int) -> void:
-	var classDef = classes[index]
+	var classDef: CharacterClass = classes[index]
 	hp_lvl_value.text = str(classDef.hp_per_lvl)
 	main_stat_value.text = str(GlobalEnums.StatType.find_key(classDef.main_stat))
 	second_stat_value.text = str(GlobalEnums.StatType.find_key(classDef.secondary_stat))
