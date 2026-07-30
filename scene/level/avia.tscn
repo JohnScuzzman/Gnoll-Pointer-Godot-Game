@@ -121,4 +121,7 @@ position = Vector2(1402, 318)
 [node name="EnemyExample4" parent="." unique_id=691960021 instance=ExtResource("9_nmh1o")]
 position = Vector2(1350, 142)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=919671647]
+color = Color(0.1148968, 0.11489681, 0.1148968, 1)
+
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
