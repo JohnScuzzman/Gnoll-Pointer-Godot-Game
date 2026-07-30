@@ -19,6 +19,10 @@ func _ready() -> void:
 	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	
+	stats.level = 1
+	stats.next_level_experience = get_required_xp(0)
+	user_interface.update_ui(self)
 
 func try_move_or_colide(input_direction: Vector2) -> Object:
 	var new_player_position: Vector2
@@ -69,6 +73,24 @@ func update_health(value: int) -> void:
 		stats.health_points = stats.max_health_points
 		
 	can_rest = stats.health_points < stats.max_health_points
+	# TODO : Probably only update the health
+	user_interface.update_ui(self)
+
+func update_xp(value: int) -> void:
+	stats.experience += value
+	if (stats.experience >= stats.next_level_experience):
+		stats.experience = stats.next_level_experience - stats.experience
+		level_up()
+		
+	# TODO : Probably only update the health
+	user_interface.update_ui(self)
+
+func level_up() -> void:
+	stats.next_level_experience = get_required_xp(stats.level)
+	stats.level += 1
+
+func get_required_xp(level: int) -> int:
+	return int(100 + (level * level * 10))
 	
 func on_rest() -> void:
 	update_health(rest_rate)

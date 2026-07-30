@@ -5,13 +5,14 @@
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_og86u"]
 bg_color = Color(0.10668749, 0.10377861, 0.0950525, 0.78431374)
 
-[node name="UserInterface" type="CanvasLayer" unique_id=344285624 node_paths=PackedStringArray("events_container", "event_box_scroll_container", "game_over_panel", "game_over_container", "main_menu_button")]
+[node name="UserInterface" type="CanvasLayer" unique_id=344285624 node_paths=PackedStringArray("events_container", "event_box_scroll_container", "game_over_panel", "game_over_container", "main_menu_button", "debug_label")]
 script = ExtResource("1_6d8lp")
 events_container = NodePath("EventBoxContainer/EventBoxScrollContainer/EventsContainer")
 event_box_scroll_container = NodePath("EventBoxContainer/EventBoxScrollContainer")
 game_over_panel = NodePath("GameOverPanel")
 game_over_container = NodePath("GameOverContainer")
 main_menu_button = NodePath("GameOverContainer/MarginContainer2/MainMenuButton")
+debug_label = NodePath("DebugLabel")
 
 [node name="DebugLabel" type="Label" parent="." unique_id=941189025]
 offset_left = 15.0
@@ -19,9 +20,11 @@ offset_top = 15.0
 offset_right = 55.0
 offset_bottom = 38.0
 text = "Name:
-=Class:
+Class:
 Race:
-HP:"
+HP: X
+Level: X
+XP: X/X"
 
 [node name="Controls" type="Label" parent="." unique_id=350376915]
 anchors_preset = 2

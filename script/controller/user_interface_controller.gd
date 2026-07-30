@@ -7,12 +7,22 @@ extends CanvasLayer
 @export var game_over_container: BoxContainer
 @export var main_menu_button: Button
 
+@export var debug_label: Label
+
 var game_over_visible: bool
 
 func _ready() -> void:
 	game_over_panel.visible = false
 	game_over_container.visible = false
 	game_over_visible = false
+
+func update_ui(player: BaseEntity) -> void:
+		debug_label.text = "Name: " + str(player.stats.name) + "\n" + \
+			"Class: " + str(player.character_class.name) + "\n" + \
+			"Race: " + str(player.race.name) + "\n" + \
+			"HP: " + str(player.stats.health_points) + "\n" + \
+			"Level: " + str(player.stats.level) + "\n" + \
+			"XP: " + str(player.stats.experience) + " / " + str(player.stats.next_level_experience)
 
 func add_event_log(message: String) -> void:
 	var new_log: Label = Label.new()

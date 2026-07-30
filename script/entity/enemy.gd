@@ -14,12 +14,14 @@ var game_level_reference: Node
 
 var player_in_aggro_area: bool = false
 var is_dead: bool = false
+var is_aggressive: bool = false
 
 #PlaceHolder
 var entity_name: String = "Kobold"
 var hp_max: int = 1
 var hp: int = hp_max
 var armor_value: int = 0
+var xp_drop: int = 50
 
 func _ready() -> void:
 	game_level_reference = get_node("/root/GameLevel")
@@ -38,6 +40,8 @@ func _ready() -> void:
 	aggro_radius = aggro_area.get_node("AggroRadiusShape2D")
 	aggro_radius.shape.size = Vector2(GlobalVariable.tile_size * aggro_area_size, GlobalVariable.tile_size * aggro_area_size)
 	
+	game_level_reference.active_entities.append(self)
+	
 func _physics_process(_delta: float) -> void:
 	if (player_in_aggro_area):
 		ray_cast.target_position = ray_cast.to_local(game_level_reference.player.global_position)
@@ -45,9 +49,9 @@ func _physics_process(_delta: float) -> void:
 		if ray_cast.is_colliding():
 			var collider: Object = ray_cast.get_collider()
 			if collider.is_in_group("player"):
-				game_level_reference.add_enemy_as_active(self)
+				is_aggressive = true
 	else:
-		game_level_reference.remove_enemy_as_active(self)
+		is_aggressive = false
 
 func on_hit(value: int) -> int:
 	value -= armor_value
@@ -66,7 +70,7 @@ func update_health(value: int) -> void:
 		hp = hp_max
 
 func on_death() -> void:
-	game_level_reference.active_enemies.erase(self)
+	game_level_reference.active_entities.erase(self)
 	sprite.texture = death_texture
 	collision_shape.disabled = true
 	remove_from_group("enemy")
