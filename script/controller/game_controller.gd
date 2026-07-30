@@ -16,7 +16,7 @@ var player_name: String
 var player_class: Resource
 var player_race: Resource
 
-var active_enemies: Array[Node]
+var active_entities: Array[Node]
 var is_player_turn: bool = true
 var is_game_over: bool = false
 
@@ -61,16 +61,8 @@ func initialize_astar() -> void:
 			if tile_data && tile_data.get_collision_polygons_count(0) > 0:
 				astar.set_point_solid(cell, true)
 
-func update_ui() -> void:
-		user_interface.get_node("DebugLabel").text = "Name: " + str(player.stats.name) + "\n" + \
-			"Class: " + str(player.character_class.name) + "\n" + \
-			"Race: " + str(player.race.name) + "\n" + \
-			"HP: " + str(player.stats.health_points)
-
 func _physics_process(_delta: float) -> void:
 	if (!is_game_over):
-		update_ui()
-		
 		if (player.is_dead && !user_interface.game_over_visible):
 			user_interface.show_game_over_screen()
 			is_game_over = true
@@ -85,11 +77,13 @@ func _physics_process(_delta: float) -> void:
 					Input.get_action_strength("down") - Input.get_action_strength("up"))
 					
 			if (input_direction != Vector2.ZERO):
-				var player_collision: Object = player.try_move_or_colide(input_direction)
-				if (player_collision != null):
-					if player_collision.is_in_group("enemy"):
+				var interacted_entity: Object = player.try_move_or_colide(input_direction)
+				if (interacted_entity != null):
+					if interacted_entity.is_in_group("enemy"):
 						print("Player colided with an enemy")
-						user_interface.add_event_log("You hit " + player_collision.entity_name + " for " + str(player_collision.on_hit(1)) + " damage")
+						user_interface.add_event_log("You hit " + interacted_entity.entity_name + " for " + str(interacted_entity.on_hit(1)) + " damage")
+						if (interacted_entity.is_dead):
+							player.update_xp(interacted_entity.xp_drop)
 						end_player_turn()
 					else:
 						print("Player colided with an obstacle")
@@ -117,7 +111,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			test_enemy.game_level_reference = self
 			test_enemy.astar = astar
 			add_child(test_enemy)
-			active_enemies.append(test_enemy)
 
 func end_player_turn() -> void:
 	print("End of player turn")
@@ -127,26 +120,15 @@ func end_player_turn() -> void:
 func _on_turn_timer_timeout() -> void:
 	enemy_turn()
 
-# TODO : Probably move enemy state into state
-func add_enemy_as_active(enemy: Node) -> void:
-	if (!active_enemies.has(enemy)):
-		active_enemies.append(enemy)
-
-# TODO : Probably move enemy state into state
-func remove_enemy_as_active(enemy: Node) -> void:
-	if (active_enemies.has(enemy)):
-		active_enemies.erase(enemy)
-
-# TODO : Probably decouple this logic and move it into enemy its detrimental here
 func enemy_turn() -> void: 
 	print("Start of enemy turn")
 	
-	for active_enemy: Node in active_enemies:
-		var enemy_collision: Object = active_enemy.execute_turn(player)
-		if (enemy_collision != null && enemy_collision.is_in_group("player")):
-			user_interface.add_event_log(active_enemy.entity_name + " hit you for " + str(player.on_hit(1)) +  " damage")
-					
-	
+	for active_entity: Node in active_entities:
+		if (active_entity.is_in_group("enemy") && active_entity.is_aggressive):
+			var enemy_collision: Object = active_entity.execute_turn(player)
+			if (enemy_collision != null && enemy_collision.is_in_group("player")):
+				user_interface.add_event_log(active_entity.entity_name + " hit you for " + str(player.on_hit(1)) +  " damage")
+				
 	# This is for debug delete eventually
 	print("End of enemy turn")
 	turn += 1
