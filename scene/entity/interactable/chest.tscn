@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://b6d1lqhwwtjcf"]
+
+[ext_resource type="Script" uid="uid://bbosn3o7aers1" path="res://script/entity/chest.gd" id="1_8eyvj"]
+[ext_resource type="Texture2D" uid="uid://c1k5dly7os3x4" path="res://art/sprite/interactable/chest.png" id="2_qf1q3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8eyvj"]
+size = Vector2(64, 64)
+
+[node name="Chest" type="RigidBody2D" unique_id=231084165]
+script = ExtResource("1_8eyvj")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130024777]
+position = Vector2(32, 32)
+texture = ExtResource("2_qf1q3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907339256]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_8eyvj")

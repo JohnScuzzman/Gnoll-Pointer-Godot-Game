@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c8xr027art8oh"]
 
 [ext_resource type="Script" uid="uid://bkcyj07u6insp" path="res://script/entity/enemy.gd" id="1_six12"]
-[ext_resource type="Texture2D" uid="uid://b4j3sarcnk47r" path="res://art/sprite/enemy/rat.png" id="2_xqrf6"]
+[ext_resource type="Texture2D" uid="uid://bv7jn4ghgsgu6" path="res://art/sprite/interactable/guts.png" id="2_nl0my"]
 [ext_resource type="Texture2D" uid="uid://bp75ii1kdku3f" path="res://art/sprite/enemy/kobold.png" id="3_2uwqk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
@@ -16,7 +16,7 @@ size = Vector2(128, 128)
 [node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
 gravity_scale = 0.0
 script = ExtResource("1_six12")
-death_texture = ExtResource("2_xqrf6")
+death_texture = ExtResource("2_nl0my")
 aggro_area_size = 10.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1387523516]
