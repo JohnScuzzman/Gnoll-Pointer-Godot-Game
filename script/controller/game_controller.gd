@@ -107,8 +107,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 		if event.is_action_pressed("interact"):
 			var colider: Object = player.check_for_interactable()
-			if colider != null && colider.is_in_group("interactable"):
-				user_interface.toggle_inventory_screen(player, colider)
+			print(colider)
+			if colider != null && colider.get_parent().is_in_group("interactable"):
+				user_interface.toggle_inventory_screen(player, colider.get_parent())
 			
 		if event.is_action_pressed("spawn"):
 			var test_enemy: Node = ENEMY_EXAMPLE_SCENE.instantiate()

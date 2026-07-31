@@ -1,29 +1,9 @@
 [gd_scene format=3 uid="uid://c8xr027art8oh"]
 
 [ext_resource type="Script" uid="uid://bkcyj07u6insp" path="res://script/entity/enemy.gd" id="1_six12"]
-[ext_resource type="Script" uid="uid://beaj6bwwi63dy" path="res://script/model/entity/entity_definition.gd" id="2_2rxnp"]
 [ext_resource type="Texture2D" uid="uid://bv7jn4ghgsgu6" path="res://art/sprite/interactable/guts.png" id="2_nl0my"]
 [ext_resource type="Texture2D" uid="uid://bp75ii1kdku3f" path="res://art/sprite/enemy/kobold.png" id="3_2uwqk"]
 [ext_resource type="Shader" uid="uid://i7avmghvto2q" path="res://art/shader/highlight.gdshader" id="3_qi6ns"]
-[ext_resource type="Script" uid="uid://cv155xjy2h83a" path="res://script/model/item/item.gd" id="3_rv88s"]
-
-[sub_resource type="Resource" id="Resource_xmgs5"]
-script = ExtResource("2_2rxnp")
-name = "Kobold"
-description = "It got stwing in his pocket"
-death_name = "Kobold Mush"
-death_description = "It did not eat its sketti"
-metadata/_custom_type_script = "uid://beaj6bwwi63dy"
-
-[sub_resource type="Resource" id="Resource_2rxnp"]
-script = ExtResource("3_rv88s")
-name = "Stwing"
-metadata/_custom_type_script = "uid://cv155xjy2h83a"
-
-[sub_resource type="Resource" id="Resource_rv88s"]
-script = ExtResource("3_rv88s")
-name = "Sketti"
-metadata/_custom_type_script = "uid://cv155xjy2h83a"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nl0my"]
 resource_local_to_scene = true
@@ -43,13 +23,9 @@ size = Vector2(64, 64)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
 size = Vector2(64, 64)
 
-[sub_resource type="LabelSettings" id="LabelSettings_qi6ns"]
-
 [node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
 gravity_scale = 0.0
 script = ExtResource("1_six12")
-entity_definition = SubResource("Resource_xmgs5")
-inventory = Array[ExtResource("3_rv88s")]([SubResource("Resource_2rxnp"), SubResource("Resource_rv88s")])
 death_texture = ExtResource("2_nl0my")
 aggro_area_size = 10.0
 
@@ -84,13 +60,12 @@ position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_yh4yq")
 
 [node name="Tooltip" type="Label" parent="." unique_id=1190000025]
-offset_left = -78.0
-offset_top = -89.0
-offset_right = 133.0
-offset_bottom = -41.333332
+offset_left = 66.0
+offset_top = -32.0
+offset_right = 277.0
+offset_bottom = 15.666668
 text = "Kobold
 \"it got swting in his pocket\""
-label_settings = SubResource("LabelSettings_qi6ns")
 
 [connection signal="body_entered" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_entered"]
 [connection signal="body_exited" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_exited"]
