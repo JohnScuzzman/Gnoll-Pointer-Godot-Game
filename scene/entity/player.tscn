@@ -2,6 +2,17 @@
 
 [ext_resource type="Script" uid="uid://dsn1lalff0tbv" path="res://script/entity/player.gd" id="1_n2tfw"]
 [ext_resource type="Texture2D" uid="uid://b3mrufsv6tjhb" path="res://art/sprite/player/human_melee.png" id="2_n2tfw"]
+[ext_resource type="Script" uid="uid://cv155xjy2h83a" path="res://script/model/item/item.gd" id="2_xjd6f"]
+
+[sub_resource type="Resource" id="Resource_ki0kj"]
+script = ExtResource("2_xjd6f")
+name = "Body Pillow"
+metadata/_custom_type_script = "uid://cv155xjy2h83a"
+
+[sub_resource type="Resource" id="Resource_yp471"]
+script = ExtResource("2_xjd6f")
+name = "Out Of Position (Book)"
+metadata/_custom_type_script = "uid://cv155xjy2h83a"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
 size = Vector2(16, 16)
@@ -25,8 +36,7 @@ fill_from = Vector2(0.5, 0.5)
 collision_layer = 3
 collision_mask = 3
 script = ExtResource("1_n2tfw")
-rest_rate = null
-inventory = null
+inventory = Array[ExtResource("2_xjd6f")]([SubResource("Resource_ki0kj"), SubResource("Resource_yp471")])
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1834460609]
 z_index = 5
@@ -50,3 +60,11 @@ scale = Vector2(0.1, 0.1)
 energy = 2.0
 texture = SubResource("GradientTexture2D_15q6v")
 texture_scale = 15.0
+
+[node name="NorthRayCast2D" type="RayCast2D" parent="." unique_id=1583378908]
+
+[node name="SouthRayCast2D" type="RayCast2D" parent="." unique_id=616711444]
+
+[node name="EastRayCast2D" type="RayCast2D" parent="." unique_id=1618248675]
+
+[node name="WestRayCast2D" type="RayCast2D" parent="." unique_id=1391992193]

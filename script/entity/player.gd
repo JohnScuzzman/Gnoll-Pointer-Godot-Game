@@ -5,10 +5,15 @@ extends BaseEntity
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
+@onready var north_ray_cast_2D: RayCast2D = $NorthRayCast2D
+@onready var south_ray_cast_2D: RayCast2D = $SouthRayCast2D
+@onready var east_ray_cast_2D: RayCast2D = $EastRayCast2D
+@onready var west_ray_cast_2D: RayCast2D = $WestRayCast2D
 
 var user_interface: Node
 var is_resting: bool = false
 var can_rest: bool = false
+var can_move: bool = true
 var is_dead: bool = false
 var turns_rested: int = 0
 
@@ -19,6 +24,15 @@ func _ready() -> void:
 	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	
+	north_ray_cast_2D.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	north_ray_cast_2D.target_position = Vector2(0, -GlobalVariable.tile_size / 2.0)
+	south_ray_cast_2D.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	south_ray_cast_2D.target_position = Vector2(0, GlobalVariable.tile_size / 2.0)
+	east_ray_cast_2D.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	east_ray_cast_2D.target_position = Vector2(GlobalVariable.tile_size / 2.0, 0)
+	west_ray_cast_2D.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	west_ray_cast_2D.target_position = Vector2(-GlobalVariable.tile_size / 2.0, 0)
 	
 	stats.level = 1
 	stats.next_level_experience = get_required_xp(0)
@@ -99,3 +113,14 @@ func on_rest() -> void:
 		user_interface.add_event_log("You rested for " + str(turns_rested) + " turn(s)")
 		turns_rested = 0
 		is_resting = false;
+
+func check_for_interactable() -> Object:
+	if north_ray_cast_2D.is_colliding():
+		return north_ray_cast_2D.get_collider()
+	if south_ray_cast_2D.is_colliding():
+		return south_ray_cast_2D.get_collider()
+	if east_ray_cast_2D.is_colliding():
+		return east_ray_cast_2D.get_collider()
+	if west_ray_cast_2D.is_colliding():
+		return west_ray_cast_2D.get_collider()
+	return null

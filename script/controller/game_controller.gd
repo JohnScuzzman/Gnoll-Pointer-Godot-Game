@@ -8,7 +8,7 @@ extends Node2D
 @onready var turn_timer: Timer = $TurnTimer
 
 const PLAYER_SCENE = preload("res://scene/entity/player.tscn")
-const ENEMY_EXAMPLE_SCENE = preload("res://scene/entity/enemies/enemy_example.tscn")
+const ENEMY_EXAMPLE_SCENE = preload("res://scene/entity/enemy/enemy_example.tscn")
 
 var is_scene_ready: bool = false
 var player: BaseEntity
@@ -67,7 +67,7 @@ func _physics_process(_delta: float) -> void:
 			user_interface.show_game_over_screen()
 			is_game_over = true
 			
-		if (is_player_turn):
+		if (is_player_turn && player.can_move):
 			if (player.is_resting):
 				player.on_rest()
 				end_player_turn()
@@ -93,23 +93,27 @@ func _physics_process(_delta: float) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if (is_player_turn && event.is_action_pressed("rest") || 
 		event.is_action_pressed("interact") || event.is_action_pressed("spawn") ||
-		event.is_action_pressed("skip_turn")):
+		event.is_action_pressed("skip_turn") || event.is_action_pressed("inventory")):
 		
 		if (event.is_action_pressed("skip_turn")):
 			end_player_turn()
+		
+		if (event.is_action_pressed("inventory")):
+			user_interface.toggle_inventory_screen(player, null)
 		
 		if (event.is_action_pressed("rest") && player.can_rest):
 			player.is_resting = true
 			end_player_turn()
 		
 		if event.is_action_pressed("interact"):
-			print("Check North, South, West, East, Current Position for an interactable and call its on_interact function")
+			var colider: Object = player.check_for_interactable()
+			if colider != null && colider.is_in_group("interactable"):
+				user_interface.toggle_inventory_screen(player, colider)
 			
 		if event.is_action_pressed("spawn"):
 			var test_enemy: Node = ENEMY_EXAMPLE_SCENE.instantiate()
 			test_enemy.global_position = Vector2(player.global_position.x + (GlobalVariable.tile_size * 3), player.global_position.y)
 			test_enemy.game_level_reference = self
-			test_enemy.astar = astar
 			add_child(test_enemy)
 
 func end_player_turn() -> void:
