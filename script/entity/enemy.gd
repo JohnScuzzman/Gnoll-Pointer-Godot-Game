@@ -5,6 +5,7 @@ extends RigidBody2D
 @export var death_texture : Texture2D
 @export var aggro_area_size : float
 @export var highlight_color: Color = Color(1, 0, 0, 1)
+@export var death_highlight_color: Color = Color(0, 0, 1, 1)
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
@@ -56,6 +57,7 @@ func _ready() -> void:
 	enemy_collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 	
 	tooltip.visible = false
+	tooltip.text = entity_definition.name  + "\n\"" + entity_definition.description + "\""
 	
 	game_level_reference.active_entities.append(self)
 	
@@ -149,7 +151,11 @@ func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
 		player_in_aggro_area = false
 
 func _on_enemy_area_2d_mouse_shape_entered(_shape_idx: int) -> void:
-	sprite.material.set_shader_parameter("outline_color", highlight_color)
+	if (is_dead):
+		sprite.material.set_shader_parameter("outline_color", death_highlight_color)
+	else:
+		sprite.material.set_shader_parameter("outline_color", highlight_color)
+		
 	sprite.material.set_shader_parameter("outline_width", 4.0)
 	is_highlighted = true
 	tooltip.visible = true
