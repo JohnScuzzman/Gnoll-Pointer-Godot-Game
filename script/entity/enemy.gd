@@ -1,20 +1,28 @@
 extends RigidBody2D
 
+@export var entity_definition : EntityDefinition
+@export var inventory: Array[Item]
 @export var death_texture : Texture2D
 @export var aggro_area_size : float
+@export var highlight_color: Color = Color(1, 0, 0, 1)
+@export var death_highlight_color: Color = Color(0, 0, 1, 1)
 
 @onready var sprite: Sprite2D = $Sprite2D
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var shape_cast: ShapeCast2D = $ShapeCast2D
 @onready var ray_cast: RayCast2D = $LineOfSightRayCast2D
 @onready var aggro_area: Area2D = $AggroArea2D
 @onready var aggro_radius: CollisionShape2D
+@onready var highlight_area: Area2D = $HighlightArea2D
+@onready var highlight_collision_shape: CollisionShape2D
+@onready var enemy_collision_shape: CollisionShape2D = $EnemyCollisionShape2D
+@onready var tooltip: Label = $Tooltip
 
 var game_level_reference: Node
 
 var player_in_aggro_area: bool = false
 var is_dead: bool = false
 var is_aggressive: bool = false
+var is_highlighted: bool = false
 
 #PlaceHolder
 var entity_name: String = "Kobold"
@@ -28,19 +36,34 @@ func _ready() -> void:
 	add_to_group("enemy")
 	gravity_scale = 0
 	global_position = get_rounded_vector2(global_position.x, global_position.y)
+	
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.target_position = Vector2.ZERO
-	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
-	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	
 	ray_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	ray_cast.target_position = Vector2.ZERO
+	
 	aggro_area.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	aggro_radius = aggro_area.get_node("AggroRadiusShape2D")
 	aggro_radius.shape.size = Vector2(GlobalVariable.tile_size * aggro_area_size, GlobalVariable.tile_size * aggro_area_size)
 	
+	highlight_area.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	highlight_collision_shape = highlight_area.get_node("HighlightCollisionShape2D")
+	highlight_collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	
+	enemy_collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
+	
+	tooltip.visible = false
+	tooltip.text = entity_definition.name  + "\n\"" + entity_definition.description + "\""
+	
 	game_level_reference.active_entities.append(self)
+	
+func _process(_delta: float) -> void:
+	if (is_highlighted):
+		tooltip.global_position = Vector2(get_global_mouse_position().x + 32, get_global_mouse_position().y)
 	
 func _physics_process(_delta: float) -> void:
 	if (player_in_aggro_area):
@@ -72,9 +95,10 @@ func update_health(value: int) -> void:
 func on_death() -> void:
 	game_level_reference.active_entities.erase(self)
 	sprite.texture = death_texture
-	collision_shape.disabled = true
+	enemy_collision_shape.disabled = true
 	remove_from_group("enemy")
 	add_to_group("interactable")
+	tooltip.text = entity_definition.death_name  + "\n\"" + entity_definition.death_description + "\""
 
 func execute_turn(player: Node) -> Object:
 	if (!is_dead):
@@ -125,3 +149,18 @@ func _on_aggro_area_2d_body_entered(body: Node2D) -> void:
 func _on_aggro_area_2d_body_exited(body: Node2D) -> void:
 	if (body.is_in_group("player")):
 		player_in_aggro_area = false
+
+func _on_enemy_area_2d_mouse_shape_entered(_shape_idx: int) -> void:
+	if (is_dead):
+		sprite.material.set_shader_parameter("outline_color", death_highlight_color)
+	else:
+		sprite.material.set_shader_parameter("outline_color", highlight_color)
+		
+	sprite.material.set_shader_parameter("outline_width", 4.0)
+	is_highlighted = true
+	tooltip.visible = true
+
+func _on_enemy_area_2d_mouse_shape_exited(_shape_idx: int) -> void:
+	sprite.material.set_shader_parameter("outline_width", 0.0)
+	is_highlighted = false
+	tooltip.visible = false

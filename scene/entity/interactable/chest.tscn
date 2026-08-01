@@ -1,18 +1,57 @@
 [gd_scene format=3 uid="uid://b6d1lqhwwtjcf"]
 
 [ext_resource type="Script" uid="uid://bbosn3o7aers1" path="res://script/entity/chest.gd" id="1_8eyvj"]
+[ext_resource type="Script" uid="uid://beaj6bwwi63dy" path="res://script/model/entity/entity_definition.gd" id="2_3ylki"]
+[ext_resource type="Shader" uid="uid://i7avmghvto2q" path="res://art/shader/highlight.gdshader" id="2_3805t"]
 [ext_resource type="Texture2D" uid="uid://c1k5dly7os3x4" path="res://art/sprite/interactable/chest.png" id="2_qf1q3"]
+
+[sub_resource type="Resource" id="Resource_qf1q3"]
+script = ExtResource("2_3ylki")
+name = "Chest"
+description = "Contains all sort of treasure"
+metadata/_custom_type_script = "uid://beaj6bwwi63dy"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8eyvj"]
+resource_local_to_scene = true
+shader = ExtResource("2_3805t")
+shader_parameter/outline_color = Color(1, 0, 0, 1)
+shader_parameter/outline_width = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8eyvj"]
 size = Vector2(64, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qf1q3"]
+size = Vector2(64, 64)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8eyvj"]
+
 [node name="Chest" type="RigidBody2D" unique_id=231084165]
 script = ExtResource("1_8eyvj")
+entity_definition = SubResource("Resource_qf1q3")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=2130024777]
+material = SubResource("ShaderMaterial_8eyvj")
 position = Vector2(32, 32)
 texture = ExtResource("2_qf1q3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=907339256]
 position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_8eyvj")
+
+[node name="HighlightArea2D" type="Area2D" parent="." unique_id=953735349]
+position = Vector2(32, 32)
+
+[node name="HighlightCollisionShape2D" type="CollisionShape2D" parent="HighlightArea2D" unique_id=710135753]
+shape = SubResource("RectangleShape2D_qf1q3")
+
+[node name="Tooltip" type="Label" parent="." unique_id=226354605]
+offset_left = -78.0
+offset_top = -89.0
+offset_right = 133.0
+offset_bottom = -41.333332
+text = "Kobold
+\"it got swting in his pocket\""
+label_settings = SubResource("LabelSettings_8eyvj")
+
+[connection signal="mouse_entered" from="HighlightArea2D" to="." method="_on_highlight_area_2d_mouse_entered"]
+[connection signal="mouse_exited" from="HighlightArea2D" to="." method="_on_highlight_area_2d_mouse_exited"]

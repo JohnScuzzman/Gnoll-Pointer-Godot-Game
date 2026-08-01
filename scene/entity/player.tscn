@@ -62,9 +62,17 @@ texture = SubResource("GradientTexture2D_15q6v")
 texture_scale = 15.0
 
 [node name="NorthRayCast2D" type="RayCast2D" parent="." unique_id=1583378908]
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="SouthRayCast2D" type="RayCast2D" parent="." unique_id=616711444]
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="EastRayCast2D" type="RayCast2D" parent="." unique_id=1618248675]
+collide_with_areas = true
+collide_with_bodies = false
 
 [node name="WestRayCast2D" type="RayCast2D" parent="." unique_id=1391992193]
+collide_with_areas = true
+collide_with_bodies = false

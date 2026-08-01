@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://c8xr027art8oh"]
+
+[ext_resource type="Script" uid="uid://bkcyj07u6insp" path="res://script/entity/enemy.gd" id="1_six12"]
+[ext_resource type="Texture2D" uid="uid://bv7jn4ghgsgu6" path="res://art/sprite/interactable/guts.png" id="2_nl0my"]
+[ext_resource type="Texture2D" uid="uid://bp75ii1kdku3f" path="res://art/sprite/enemy/kobold.png" id="3_2uwqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qvgj6"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_shqcg"]
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yh4yq"]
+size = Vector2(64, 64)
+
+[node name="EnemyExample" type="RigidBody2D" unique_id=738268757]
+gravity_scale = 0.0
+script = ExtResource("1_six12")
+death_texture = ExtResource("2_nl0my")
+aggro_area_size = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1387523516]
+texture = ExtResource("3_2uwqk")
+offset = Vector2(32, 32)
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=780018180]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_qvgj6")
+target_position = Vector2(0, 0)
+
+[node name="LineOfSightRayCast2D" type="RayCast2D" parent="." unique_id=1962434206]
+position = Vector2(32, 32)
+target_position = Vector2(0, 128)
+
+[node name="AggroArea2D" type="Area2D" parent="." unique_id=1843475405]
+position = Vector2(32, 32)
+
+[node name="AggroRadiusShape2D" type="CollisionShape2D" parent="AggroArea2D" unique_id=136729499]
+shape = SubResource("RectangleShape2D_shqcg")
+
+[node name="EnemyArea2D" type="Area2D" parent="." unique_id=542485877]
+
+[node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="EnemyArea2D" unique_id=1280890054]
+position = Vector2(32, 32)
+shape = SubResource("RectangleShape2D_yh4yq")
+
+[connection signal="body_entered" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_entered"]
+[connection signal="body_exited" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_exited"]
+[connection signal="mouse_shape_entered" from="EnemyArea2D" to="." method="_on_enemy_area_2d_mouse_shape_entered"]
+[connection signal="mouse_shape_exited" from="EnemyArea2D" to="." method="_on_enemy_area_2d_mouse_shape_exited"]
