@@ -164,3 +164,9 @@ func _on_enemy_area_2d_mouse_shape_exited(_shape_idx: int) -> void:
 	sprite.material.set_shader_parameter("outline_width", 0.0)
 	is_highlighted = false
 	tooltip.visible = false
+
+func _on_highlight_area_2d_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if (event is InputEventMouseButton && event.pressed &&
+			event.button_index == MOUSE_BUTTON_LEFT && is_dead && 
+			game_level_reference.player.can_move):
+		game_level_reference.player.target_interaction = self

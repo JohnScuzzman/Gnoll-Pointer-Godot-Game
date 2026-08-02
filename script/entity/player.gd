@@ -10,12 +10,17 @@ extends BaseEntity
 @onready var east_ray_cast_2D: RayCast2D = $EastRayCast2D
 @onready var west_ray_cast_2D: RayCast2D = $WestRayCast2D
 
+var game_level_reference: Node
+
 var user_interface: Node
 var is_resting: bool = false
 var can_rest: bool = false
 var can_move: bool = true
 var is_dead: bool = false
 var turns_rested: int = 0
+# TODO : Update target_position based on if entity is enemy to follow them
+var target_position: Variant = null
+var target_interaction: Object
 
 func _ready() -> void:
 	add_to_group("player")
@@ -39,6 +44,7 @@ func _ready() -> void:
 	user_interface.update_ui(self)
 
 func try_move_or_colide(input_direction: Vector2) -> Object:
+	print(target_interaction)
 	var new_player_position: Vector2
 	
 	shape_cast.target_position = Vector2.ZERO
@@ -62,15 +68,41 @@ func try_move_or_colide(input_direction: Vector2) -> Object:
 	shape_cast.force_shapecast_update()
 	
 	if shape_cast.is_colliding():
+		target_position = null
+		target_interaction = null
 		return shape_cast.get_collider(0)
 	else:
 		global_position = new_player_position
-		
+		if (target_position == global_position):
+			target_position = null
+			if (target_interaction != null):
+				var saved_target_interaction: Object = target_interaction
+				target_interaction = null
+				return saved_target_interaction
 	return null
-		
+
+func set_target_position(target: Variant) -> void:
+	target_position = get_rounded_vector2(target.x - (GlobalVariable.tile_size / 2.0), target.y - (GlobalVariable.tile_size / 2.0))
+
+func get_next_target_position_step() -> Variant:
+	if (target_position != null):
+		var potential_next_move: Variant = get_next_step(
+			Vector2((global_position.x / GlobalVariable.tile_size), (global_position.y / GlobalVariable.tile_size)),
+			Vector2((target_position.x / GlobalVariable.tile_size), (target_position.y / GlobalVariable.tile_size)))
+		if (potential_next_move != null):
+			return potential_next_move - global_position
+	return null
+
+func get_next_step(start: Vector2i, target: Vector2i) -> Variant:
+	if game_level_reference.astar.is_in_bounds(start.x, start.y) && game_level_reference.astar.is_in_bounds(target.x, target.y):
+		var moves_to_target: PackedVector2Array = game_level_reference.astar.get_point_path(start, target)
+		if (game_level_reference.astar.get_point_path(start, target).size() > 1):
+			return moves_to_target[1]
+	return null
+
 func get_rounded_vector2(x: float, y: float) -> Vector2:
 	return Vector2(round(x / GlobalVariable.tile_size) * GlobalVariable.tile_size, round(y / GlobalVariable.tile_size) * GlobalVariable.tile_size)
-	
+
 func on_hit(value: int) -> int:
 	value -= stats.armor_class
 	update_health(-value)
