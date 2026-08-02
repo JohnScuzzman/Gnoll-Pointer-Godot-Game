@@ -32,7 +32,7 @@ shader_parameter/outline_color = Color(1, 0, 0, 1)
 shader_parameter/outline_width = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qvgj6"]
-size = Vector2(64, 64)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_shqcg"]
 size = Vector2(128, 128)
@@ -59,7 +59,7 @@ texture = ExtResource("3_2uwqk")
 offset = Vector2(32, 32)
 
 [node name="ShapeCast2D" type="ShapeCast2D" parent="." unique_id=780018180]
-position = Vector2(32, 32)
+position = Vector2(96, 96)
 shape = SubResource("RectangleShape2D_qvgj6")
 target_position = Vector2(0, 0)
 

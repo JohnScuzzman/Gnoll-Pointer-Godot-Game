@@ -27,6 +27,7 @@ func _ready() -> void:
 	sprite.offset = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	shape_cast.shape.size = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
+	shape_cast.target_position = Vector2.ZERO
 	collision_shape.position = Vector2(GlobalVariable.tile_size / 2.0, GlobalVariable.tile_size / 2.0)
 	collision_shape.shape.size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
 	
@@ -44,26 +45,18 @@ func _ready() -> void:
 	user_interface.update_ui(self)
 
 func try_move_or_colide(input_direction: Vector2) -> Object:
-	print(target_interaction)
-	var new_player_position: Vector2
-	
-	shape_cast.target_position = Vector2.ZERO
-	shape_cast.force_shapecast_update()
+	var new_player_position: Vector2 = \
+		get_rounded_vector2(global_position.x + (input_direction.x * GlobalVariable.tile_size), 
+							global_position.y + (input_direction.y * GlobalVariable.tile_size))
+												
+	shape_cast.position = \
+		Vector2((GlobalVariable.tile_size / 2.0) + (input_direction.x * (GlobalVariable.tile_size)), 
+				(GlobalVariable.tile_size / 2.0) + (input_direction.y * (GlobalVariable.tile_size)))
 	
 	if (input_direction.x < 0):
 		sprite.flip_h = false
-		shape_cast.target_position = Vector2(-(GlobalVariable.tile_size / 2.0), 0)
-		new_player_position = get_rounded_vector2(global_position.x - GlobalVariable.tile_size, global_position.y)
 	elif (input_direction.x > 0):
 		sprite.flip_h = true
-		shape_cast.target_position = Vector2((GlobalVariable.tile_size / 2.0), 0)
-		new_player_position = get_rounded_vector2(global_position.x + GlobalVariable.tile_size, global_position.y)
-	elif (input_direction.y < 0):
-		shape_cast.target_position = Vector2(0, -(GlobalVariable.tile_size / 2.0))
-		new_player_position = get_rounded_vector2(global_position.x, global_position.y - GlobalVariable.tile_size)
-	elif (input_direction.y > 0):
-		shape_cast.target_position = Vector2(0, (GlobalVariable.tile_size / 2.0))
-		new_player_position = get_rounded_vector2(global_position.x, global_position.y + GlobalVariable.tile_size)
 	
 	shape_cast.force_shapecast_update()
 	
@@ -90,12 +83,25 @@ func get_next_target_position_step() -> Variant:
 			Vector2((global_position.x / GlobalVariable.tile_size), (global_position.y / GlobalVariable.tile_size)),
 			Vector2((target_position.x / GlobalVariable.tile_size), (target_position.y / GlobalVariable.tile_size)))
 		if (potential_next_move != null):
-			return potential_next_move - global_position
+			potential_next_move -= global_position
+			
+			if (potential_next_move.x > 0):
+				potential_next_move.x = 1
+			elif(potential_next_move.x < 0):
+				potential_next_move.x = -1
+				
+			if (potential_next_move.y > 0):
+				potential_next_move.y = 1
+			elif(potential_next_move.y < 0):
+				potential_next_move.y = -1
+				
+			return potential_next_move
 	return null
 
 func get_next_step(start: Vector2i, target: Vector2i) -> Variant:
 	if game_level_reference.astar.is_in_bounds(start.x, start.y) && game_level_reference.astar.is_in_bounds(target.x, target.y):
 		var moves_to_target: PackedVector2Array = game_level_reference.astar.get_point_path(start, target)
+		print(moves_to_target)
 		if (game_level_reference.astar.get_point_path(start, target).size() > 1):
 			return moves_to_target[1]
 	return null
