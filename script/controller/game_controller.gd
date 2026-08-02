@@ -53,7 +53,8 @@ func _ready() -> void:
 func initialize_astar() -> void:
 	astar.region = tile_map_layer_floor.get_used_rect()
 	astar.cell_size = Vector2(GlobalVariable.tile_size, GlobalVariable.tile_size)
-	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_NEVER
+	astar.diagonal_mode = AStarGrid2D.DIAGONAL_MODE_ALWAYS
+	astar.default_compute_heuristic = AStarGrid2D.HEURISTIC_CHEBYSHEV
 	astar.update()
 		
 	for layer: TileMapLayer in find_children("", "TileMapLayer", true, false):

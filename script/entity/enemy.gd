@@ -102,9 +102,6 @@ func on_death() -> void:
 
 func execute_turn(player: Node) -> Object:
 	if (!is_dead):
-		shape_cast.target_position = Vector2.ZERO
-		shape_cast.force_shapecast_update()
-		
 		var possible_next_move: Variant = get_next_move(
 			Vector2(global_position.x / GlobalVariable.tile_size, global_position.y / GlobalVariable.tile_size),
 			Vector2(player.global_position.x / GlobalVariable.tile_size, player.global_position.y / GlobalVariable.tile_size))
@@ -112,16 +109,27 @@ func execute_turn(player: Node) -> Object:
 		if (possible_next_move != null):
 			var next_move: Vector2 = possible_next_move
 			var move_dif: Vector2 = next_move - global_position
+			
+			if (move_dif.x > 0):
+				move_dif.x = 1
+			elif(move_dif.x < 0):
+				move_dif.x = -1
+				
+			if (move_dif.y > 0):
+				move_dif.y = 1
+			elif(move_dif.y < 0):
+				move_dif.y = -1
+			
+			shape_cast.position = \
+				Vector2((GlobalVariable.tile_size / 2.0) + (move_dif.x * (GlobalVariable.tile_size)), 
+						(GlobalVariable.tile_size / 2.0) + (move_dif.y * (GlobalVariable.tile_size)))
+			
+			print(shape_cast.position) 
+			
 			if move_dif.x > 0: 
 				sprite.flip_h = true
-				shape_cast.target_position = Vector2((GlobalVariable.tile_size / 2.0), 0)
 			elif(move_dif.x < 0): 
 				sprite.flip_h = false
-				shape_cast.target_position = Vector2(-(GlobalVariable.tile_size / 2.0), 0)
-			elif move_dif.y > 0: 
-				shape_cast.target_position = Vector2(0, (GlobalVariable.tile_size / 2.0))
-			else: 
-				shape_cast.target_position = Vector2(0, -(GlobalVariable.tile_size / 2.0))
 			
 			shape_cast.force_shapecast_update()
 			
