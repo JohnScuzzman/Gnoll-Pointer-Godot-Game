@@ -42,6 +42,7 @@ func _ready() -> void:
 	player.character_class = player_class
 	player.race = player_race
 	player.user_interface = user_interface
+	player.game_level_reference = self
 	add_child(player)
 	
 	player.get_node("RemoteTransform2D").remote_path = main_camera.get_path()
@@ -71,51 +72,60 @@ func _physics_process(_delta: float) -> void:
 			if (player.is_resting):
 				player.on_rest()
 				end_player_turn()
-		
-			var input_direction: Vector2 = Vector2(
+				return
+			
+			var next_move: Variant = player.get_next_target_position_step()
+			if (player.target_position == null):
+				next_move = Vector2(
 					Input.get_action_strength("right") - Input.get_action_strength("left"),
 					Input.get_action_strength("down") - Input.get_action_strength("up"))
 					
-			if (input_direction != Vector2.ZERO):
-				var interacted_entity: Object = player.try_move_or_colide(input_direction)
+			if ((next_move != null && next_move != Vector2.ZERO) || player.target_interaction != null):
+				
+				var interacted_entity: Object 
+				if (next_move != null && next_move != Vector2.ZERO):
+					interacted_entity = player.try_move_or_colide(next_move)
+				else:
+					interacted_entity = player.target_interaction
+					player.target_interaction = null
+				
 				if (interacted_entity != null):
-					if interacted_entity.is_in_group("enemy"):
+					if (interacted_entity.is_in_group("enemy")):
 						print("Player colided with an enemy")
 						user_interface.add_event_log("You hit " + interacted_entity.entity_name + " for " + str(interacted_entity.on_hit(1)) + " damage")
 						if (interacted_entity.is_dead):
 							player.update_xp(interacted_entity.xp_drop)
 						end_player_turn()
-					else:
-						print("Player colided with an obstacle")
+					elif (interacted_entity.is_in_group("interactable")):
+						user_interface.toggle_inventory_screen(player, interacted_entity)
 				else:
 					end_player_turn()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if (is_player_turn && event.is_action_pressed("rest") || 
-		event.is_action_pressed("interact") || event.is_action_pressed("spawn") ||
-		event.is_action_pressed("skip_turn") || event.is_action_pressed("inventory")):
+	if (event.is_action_pressed("skip_turn")):
+		end_player_turn()
+	
+	if (event.is_action_pressed("inventory")):
+		user_interface.toggle_inventory_screen(player, null)
+	
+	if (event.is_action_pressed("rest") && player.can_rest):
+		player.is_resting = true
+		end_player_turn()
+	
+	if event.is_action_pressed("interact"):
+		var colider: Object = player.check_for_interactable()
+		if colider != null && colider.get_parent().is_in_group("interactable"):
+			user_interface.toggle_inventory_screen(player, colider.get_parent())
 		
-		if (event.is_action_pressed("skip_turn")):
-			end_player_turn()
+	if event.is_action_pressed("spawn"):
+		var test_enemy: Node = ENEMY_EXAMPLE_SCENE.instantiate()
+		test_enemy.global_position = Vector2(player.global_position.x + (GlobalVariable.tile_size * 3), player.global_position.y)
+		test_enemy.game_level_reference = self
+		add_child(test_enemy)
 		
-		if (event.is_action_pressed("inventory")):
-			user_interface.toggle_inventory_screen(player, null)
-		
-		if (event.is_action_pressed("rest") && player.can_rest):
-			player.is_resting = true
-			end_player_turn()
-		
-		if event.is_action_pressed("interact"):
-			var colider: Object = player.check_for_interactable()
-			print(colider)
-			if colider != null && colider.get_parent().is_in_group("interactable"):
-				user_interface.toggle_inventory_screen(player, colider.get_parent())
-			
-		if event.is_action_pressed("spawn"):
-			var test_enemy: Node = ENEMY_EXAMPLE_SCENE.instantiate()
-			test_enemy.global_position = Vector2(player.global_position.x + (GlobalVariable.tile_size * 3), player.global_position.y)
-			test_enemy.game_level_reference = self
-			add_child(test_enemy)
+	if (event is InputEventMouseButton and event.pressed &&
+			event.button_index == MOUSE_BUTTON_LEFT && player.can_move):
+		player.set_target_position(get_global_mouse_position())
 
 func end_player_turn() -> void:
 	print("End of player turn")

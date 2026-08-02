@@ -94,5 +94,6 @@ label_settings = SubResource("LabelSettings_qi6ns")
 
 [connection signal="body_entered" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_entered"]
 [connection signal="body_exited" from="AggroArea2D" to="." method="_on_aggro_area_2d_body_exited"]
+[connection signal="input_event" from="HighlightArea2D" to="." method="_on_highlight_area_2d_input_event"]
 [connection signal="mouse_shape_entered" from="HighlightArea2D" to="." method="_on_enemy_area_2d_mouse_shape_entered"]
 [connection signal="mouse_shape_exited" from="HighlightArea2D" to="." method="_on_enemy_area_2d_mouse_shape_exited"]

@@ -128,3 +128,6 @@ func _on_take_button_pressed() -> void:
 		if (target_item != null):
 			player_inventory_owner.inventory.append(target_item)
 			external_inventory_owner.inventory.remove_at(index)
+
+func _on_close_button_pressed() -> void:
+	toggle_inventory_screen(player_inventory_owner, external_inventory_owner)
