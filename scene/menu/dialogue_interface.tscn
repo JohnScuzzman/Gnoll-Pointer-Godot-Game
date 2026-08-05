@@ -6,9 +6,13 @@
 script = ExtResource("1_f6opw")
 
 [node name="Panel" type="Panel" parent="." unique_id=374682512]
-offset_top = 512.0
-offset_right = 1280.0
-offset_bottom = 720.0
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -208.0
+grow_horizontal = 2
+grow_vertical = 0
 
 [node name="Speaker" type="Label" parent="Panel" unique_id=934354560]
 layout_mode = 0
