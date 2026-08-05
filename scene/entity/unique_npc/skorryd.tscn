@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bsyewd3s51ofm"]
+
+[ext_resource type="Script" uid="uid://b4ioh7p5alchj" path="res://script/entity/unique_npcs/skorryd.gd" id="1_e5x4j"]
+[ext_resource type="Texture2D" uid="uid://ck6alqa5q7p5f" path="res://art/sprite/npc/skorryd.png" id="2_do8da"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_15q6v"]
+size = Vector2(65, 65)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_one28"]
+size = Vector2(64, 64)
+
+[node name="Skorryd" type="CharacterBody2D" unique_id=433475056]
+script = ExtResource("1_e5x4j")
+
+[node name="InteractionArea" type="Area2D" parent="." unique_id=746203993]
+
+[node name="InteractionDetector" type="CollisionShape2D" parent="InteractionArea" unique_id=1833242002]
+shape = SubResource("RectangleShape2D_15q6v")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1653565134]
+texture = ExtResource("2_do8da")
+
+[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="." unique_id=2059262039]
+shape = SubResource("RectangleShape2D_one28")
