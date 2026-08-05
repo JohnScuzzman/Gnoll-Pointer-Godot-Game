@@ -28,9 +28,10 @@ script = ExtResource("11_w28d4")
 name = "Kobold Juice"
 metadata/_custom_type_script = "uid://cv155xjy2h83a"
 
-[node name="GameLevel" type="Node2D" unique_id=379133356 node_paths=PackedStringArray("user_interface", "main_camera", "tile_map_layer_floor")]
+[node name="GameLevel" type="Node2D" unique_id=379133356 node_paths=PackedStringArray("user_interface", "dialogue_interface", "main_camera", "tile_map_layer_floor")]
 script = ExtResource("1_14tgi")
 user_interface = NodePath("UserInterface")
+dialogue_interface = NodePath("DialogueInterface")
 main_camera = NodePath("Camera2D")
 tile_map_layer_floor = NodePath("Avia")
 

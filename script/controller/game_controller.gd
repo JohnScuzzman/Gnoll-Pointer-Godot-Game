@@ -2,6 +2,7 @@ extends Node2D
 
 @export var turn_cooldown : float = 0.1
 @export var user_interface: CanvasLayer
+@export var dialogue_interface: CanvasLayer
 @export var main_camera: Camera2D
 @export var tile_map_layer_floor: TileMapLayer
 
@@ -99,7 +100,11 @@ func _physics_process(_delta: float) -> void:
 						end_player_turn()
 					elif (interacted_entity.is_in_group("interactable")):
 						user_interface.toggle_inventory_screen(player, interacted_entity)
+					elif (interacted_entity.is_in_group("npc")):
+						dialogue_interface.start_dialogue(interacted_entity.entity_name, interacted_entity.dialogue_lines)
 				else:
+					if(dialogue_interface):
+						dialogue_interface.end_dialogue()
 					end_player_turn()
 
 func _unhandled_input(event: InputEvent) -> void:

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ck6alqa5q7p5f" path="res://art/sprite/npc/skorryd.png" id="2_do8da"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15q6v"]
-size = Vector2(124, 64)
+size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jjb4j"]
 size = Vector2(64, 64)
