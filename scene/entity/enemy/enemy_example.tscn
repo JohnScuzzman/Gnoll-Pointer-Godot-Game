@@ -80,7 +80,6 @@ position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_qi6ns")
 
 [node name="EnemyCollisionShape2D" type="CollisionShape2D" parent="." unique_id=1280890054]
-position = Vector2(32, 32)
 shape = SubResource("RectangleShape2D_yh4yq")
 
 [node name="Tooltip" type="Label" parent="." unique_id=1190000025]

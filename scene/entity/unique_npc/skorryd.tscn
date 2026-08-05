@@ -4,9 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://ck6alqa5q7p5f" path="res://art/sprite/npc/skorryd.png" id="2_do8da"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_15q6v"]
-size = Vector2(65, 65)
+size = Vector2(127, 127)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_one28"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jjb4j"]
 size = Vector2(64, 64)
 
 [node name="Skorryd" type="CharacterBody2D" unique_id=433475056]
@@ -20,5 +20,5 @@ shape = SubResource("RectangleShape2D_15q6v")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1653565134]
 texture = ExtResource("2_do8da")
 
-[node name="NPCCollisionShape2D" type="CollisionShape2D" parent="." unique_id=2059262039]
-shape = SubResource("RectangleShape2D_one28")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2021575652]
+shape = SubResource("RectangleShape2D_jjb4j")

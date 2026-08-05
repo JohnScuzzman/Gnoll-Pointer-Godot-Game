@@ -6,7 +6,6 @@ extends CanvasLayer
 
 var dialogue_lines: Array = []
 var current_line: int = 0
-var is_active: bool = false
 
 func _ready():
 	visible = false # Hide dialogue UI on start til we actually talk to an npc
