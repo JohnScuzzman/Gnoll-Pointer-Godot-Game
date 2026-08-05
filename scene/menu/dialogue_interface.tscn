@@ -1,26 +1,31 @@
 [gd_scene format=3 uid="uid://imdhpxlugbvn"]
 
 [ext_resource type="Script" uid="uid://174nsvibq2we" path="res://script/controller/dialogue_interface_controller.gd" id="1_f6opw"]
+[ext_resource type="Script" uid="uid://olmpbgh1628o" path="res://scene/menu/talking_head.gd" id="2_78nvn"]
 
 [node name="DialogueInterface" type="CanvasLayer" unique_id=1029120006]
 script = ExtResource("1_f6opw")
 
 [node name="Panel" type="Panel" parent="." unique_id=374682512]
-anchors_preset = 12
-anchor_top = 1.0
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -208.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+
+[node name="TalkingHeadArt" type="Sprite2D" parent="Panel" unique_id=789579126]
+centered = false
+region_rect = Rect2(0, 0, 1280, 512)
+script = ExtResource("2_78nvn")
 
 [node name="Speaker" type="Label" parent="Panel" unique_id=934354560]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_top = 516.0
+offset_right = 198.0
+offset_bottom = 558.0
 
 [node name="Dialogue" type="Label" parent="Panel" unique_id=1123071032]
 layout_mode = 0
-offset_top = 40.0
-offset_right = 40.0
-offset_bottom = 63.0
+offset_top = 544.0
+offset_right = 1280.0
+offset_bottom = 720.0
